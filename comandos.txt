@@ -1,0 +1,15 @@
+
+Add-Migration identity -Context DbApplicationDbContext
+update-Database -Context ApplicationDbContext
+
+luego el areas-identity agregarles para editar su diseño
+
+luego crear las clases 
+luego:
+Add-Migration models -Context DbBonosContext
+update-Database -Context ApplicationDbContext
+
+//Si solo lo descargaron solo hacer lo de abajo:
+
+cuando se abre desde otro meterle nomas update-database -Context ApplicationDbContext
+y update-database -Context DbBonosContext
