@@ -1,0 +1,102 @@
+﻿@model IEnumerable<BonosCalculadora.Models.Calculadora>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Identity/Pages/_ViewStart.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vnominal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vcomercial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NAños)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cok)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImRenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEmision)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prima)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estructuración)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colocación)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flotacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cavali)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vnominal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vcomercial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAños)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cok)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImRenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEmision)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prima)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estructuración)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Colocación)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flotacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cavali)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Apellidos)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CalculadoraId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CalculadoraId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CalculadoraId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -27,5 +27,6 @@ namespace BonosCalculadora.Models
         public string Correo { get; set; }
 
         public virtual ICollection<Historial> Historial { get; set; }
+        public  virtual ICollection<Calculadora> Calculadora { get; set; }
     }
 }

@@ -1,0 +1,91 @@
+﻿@model BonosCalculadora.Models.Calculadora
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Identity/Pages/_ViewStart.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Calculadora</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vnominal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vnominal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vcomercial)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vcomercial)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NAños)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NAños)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cok)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cok)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImRenta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImRenta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaEmision)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaEmision)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Prima)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Prima)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Estructuración)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Estructuración)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Colocación)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Colocación)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Flotacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Flotacion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cavali)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cavali)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cliente.Apellidos)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CalculadoraId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

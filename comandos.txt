@@ -13,3 +13,4 @@ update-Database -Context ApplicationDbContext
 
 cuando se abre desde otro meterle nomas update-database -Context ApplicationDbContext
 y update-database -Context DbBonosContext
+--
