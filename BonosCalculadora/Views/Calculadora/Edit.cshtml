@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Areas/Identity/Pages/_ViewStart.cshtml";
 }
 
 <h1>Edit</h1>
@@ -18,6 +17,31 @@
                 <label asp-for="ClienteId" class="control-label"></label>
                 <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
                 <span asp-validation-for="ClienteId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FrecuenciaPagoId" class="control-label"></label>
+                <select asp-for="FrecuenciaPagoId" class="form-control" asp-items="ViewBag.FrecuenciaPagoId"></select>
+                <span asp-validation-for="FrecuenciaPagoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiasAñoId" class="control-label"></label>
+                <select asp-for="DiasAñoId" class="form-control" asp-items="ViewBag.DiasAñoId"></select>
+                <span asp-validation-for="DiasAñoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TasaInteresId" class="control-label"></label>
+                <select asp-for="TasaInteresId" class="form-control" asp-items="ViewBag.TasaInteresId"></select>
+                <span asp-validation-for="TasaInteresId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CapitalizacionId" class="control-label"></label>
+                <select asp-for="CapitalizacionId" class="form-control" asp-items="ViewBag.CapitalizacionId"></select>
+                <span asp-validation-for="CapitalizacionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetodoPagoId" class="control-label"></label>
+                <select asp-for="MetodoPagoId" class="form-control" asp-items="ViewBag.MetodoPagoId"></select>
+                <span asp-validation-for="MetodoPagoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Vnominal" class="control-label"></label>

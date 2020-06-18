@@ -21,8 +21,7 @@ namespace BonosCalculadora.Controllers
         // GET: FrecuenciaPago
         public async Task<IActionResult> Index()
         {
-            var dbBonosContext = _context.FrecuenciaPago.Include(f => f.Calculadora);
-            return View(await dbBonosContext.ToListAsync());
+            return View(await _context.FrecuenciaPago.ToListAsync());
         }
 
         // GET: FrecuenciaPago/Details/5
@@ -34,7 +33,6 @@ namespace BonosCalculadora.Controllers
             }
 
             var frecuenciaPago = await _context.FrecuenciaPago
-                .Include(f => f.Calculadora)
                 .FirstOrDefaultAsync(m => m.FrecuenciaPagoId == id);
             if (frecuenciaPago == null)
             {
@@ -47,7 +45,6 @@ namespace BonosCalculadora.Controllers
         // GET: FrecuenciaPago/Create
         public IActionResult Create()
         {
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId");
             return View();
         }
 
@@ -56,7 +53,7 @@ namespace BonosCalculadora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FrecuenciaPagoId,CalculadoraId,Tipofrecuencia,Diasfrecuencia")] FrecuenciaPago frecuenciaPago)
+        public async Task<IActionResult> Create([Bind("FrecuenciaPagoId,Tipofrecuencia,Diasfrecuencia")] FrecuenciaPago frecuenciaPago)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +61,6 @@ namespace BonosCalculadora.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", frecuenciaPago.CalculadoraId);
             return View(frecuenciaPago);
         }
 
@@ -81,7 +77,6 @@ namespace BonosCalculadora.Controllers
             {
                 return NotFound();
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", frecuenciaPago.CalculadoraId);
             return View(frecuenciaPago);
         }
 
@@ -90,7 +85,7 @@ namespace BonosCalculadora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FrecuenciaPagoId,CalculadoraId,Tipofrecuencia,Diasfrecuencia")] FrecuenciaPago frecuenciaPago)
+        public async Task<IActionResult> Edit(int id, [Bind("FrecuenciaPagoId,Tipofrecuencia,Diasfrecuencia")] FrecuenciaPago frecuenciaPago)
         {
             if (id != frecuenciaPago.FrecuenciaPagoId)
             {
@@ -117,7 +112,6 @@ namespace BonosCalculadora.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", frecuenciaPago.CalculadoraId);
             return View(frecuenciaPago);
         }
 
@@ -130,7 +124,6 @@ namespace BonosCalculadora.Controllers
             }
 
             var frecuenciaPago = await _context.FrecuenciaPago
-                .Include(f => f.Calculadora)
                 .FirstOrDefaultAsync(m => m.FrecuenciaPagoId == id);
             if (frecuenciaPago == null)
             {

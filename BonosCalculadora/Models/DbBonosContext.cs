@@ -76,10 +76,6 @@ namespace BonosCalculadora.Models
                       .HasMaxLength(50)
                       .IsUnicode(false);
 
-                entity.HasOne(c => c.Calculadora)
-                      .WithMany(c => c.Capitalizacion)
-                      .HasForeignKey(c => c.CalculadoraId)
-                      .HasConstraintName("FK_Capitalizacion_Calculadora");
             });
             modelBuilder.Entity<DiasAño>(entity => 
             {
@@ -87,10 +83,6 @@ namespace BonosCalculadora.Models
                      .HasMaxLength(9)
                      .IsUnicode(false);
 
-                entity.HasOne(c => c.Calculadora)
-                     .WithMany(c => c.DiasAño)
-                     .HasForeignKey(c => c.CalculadoraId)
-                     .HasConstraintName("FK_DiasAño_Calculadora");
             });
             modelBuilder.Entity<FrecuenciaPago>(entity =>
             {
@@ -102,10 +94,6 @@ namespace BonosCalculadora.Models
                        .HasMaxLength(15)
                        .IsUnicode(false);
 
-                entity.HasOne(c => c.Calculadora)
-                     .WithMany(c => c.FrecuenciaPago)
-                     .HasForeignKey(c => c.CalculadoraId)
-                     .HasConstraintName("FK_FrecuenciaPago_Calculadora");
             });
             modelBuilder.Entity<MetodoPago>(entity => 
             {
@@ -113,10 +101,6 @@ namespace BonosCalculadora.Models
                   .HasMaxLength(15)
                   .IsUnicode(false);
 
-                entity.HasOne(c => c.Calculadora)
-                    .WithMany(c => c.MetodoPago)
-                    .HasForeignKey(c => c.CalculadoraId)
-                    .HasConstraintName("FK_MetodoPago_Calculadora");
 
             });
             modelBuilder.Entity<TasaInteres>(entity => 
@@ -129,10 +113,6 @@ namespace BonosCalculadora.Models
                  .HasMaxLength(15)
                  .IsUnicode(false);
 
-                entity.HasOne(c => c.Calculadora)
-                   .WithMany(c => c.TasaInteres)
-                   .HasForeignKey(c => c.CalculadoraId)
-                   .HasConstraintName("FK_TasaInteres_Calculadora");
 
             });
             modelBuilder.Entity<Calculadora>(entity=>
@@ -185,9 +165,33 @@ namespace BonosCalculadora.Models
                        .WithMany(p => p.Calculadora)
                        .HasForeignKey(d => d.ClienteId)
                        .HasConstraintName("FK_Calculadora_Ciente");
-            });
 
-            
+                entity.HasOne(d => d.Capitalizacion)
+                    .WithMany(p => p.Calculadora)
+                    .HasForeignKey(d => d.CapitalizacionId)
+                    .HasConstraintName("FK_Calculadora_Capitalizacion");
+
+                entity.HasOne(d => d.FrecuenciaPago)
+                    .WithMany(p => p.Calculadora)
+                    .HasForeignKey(d => d.FrecuenciaPagoId)
+                    .HasConstraintName("FK_Calculadora_FrecuenciaPago");
+
+                entity.HasOne(d => d.DiasAño)
+                    .WithMany(p => p.Calculadora)
+                    .HasForeignKey(d => d.DiasAñoId)
+                    .HasConstraintName("FK_Calculadora_DiasAño");
+
+                entity.HasOne(d => d.TasaInteres)
+                    .WithMany(p => p.Calculadora)
+                    .HasForeignKey(d => d.TasaInteresId)
+                    .HasConstraintName("FK_Calculadora_TasaInteres");
+
+                entity.HasOne(d => d.MetodoPago)
+                    .WithMany(p => p.Calculadora)
+                    .HasForeignKey(d => d.MetodoPagoId)
+                    .HasConstraintName("FK_Calculadora_MetodoPago");
+
+            });
 
             OnModelCreatingPartial(modelBuilder);
         }

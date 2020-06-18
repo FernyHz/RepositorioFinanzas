@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Areas/Identity/Pages/_ViewStart.cshtml";
 }
 
 <h1>Index</h1>
@@ -16,9 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.NCapitalizacion)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Calculadora)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -27,9 +23,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.NCapitalizacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calculadora.CalculadoraId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CapitalizacionId">Edit</a> |

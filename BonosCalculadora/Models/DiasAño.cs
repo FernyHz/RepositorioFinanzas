@@ -14,7 +14,7 @@ namespace BonosCalculadora.Models
         [Required(ErrorMessage = "Los dias son requeridos")]
         public int Dias { get;set; }
 
-        public virtual Calculadora Calculadora { get; set; }
-      
+        public virtual ICollection<Calculadora> Calculadora { get; set; }
+
     }
 }

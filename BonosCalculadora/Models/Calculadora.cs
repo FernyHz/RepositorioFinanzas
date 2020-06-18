@@ -11,11 +11,11 @@ namespace BonosCalculadora.Models
     {
         public int CalculadoraId { get; set; }
         public int ClienteId { get; set; }
-       // public int FrecuenciaPagoId { get; set; }
-       // public int DiasAñoId { get; set; }
-       // public int TasaInteresId { get; set; }
-       // public int CapitalizacionId { get; set; }
-       // public int MetodoPagoId { get; set; }
+        public int FrecuenciaPagoId { get; set; }
+        public int DiasAñoId { get; set; }
+        public int TasaInteresId { get; set; }
+        public int CapitalizacionId { get; set; }
+        public int MetodoPagoId { get; set; }
 
         //DEL BONO
         [Required(ErrorMessage = "Dato de entrada requerido")]
@@ -41,15 +41,21 @@ namespace BonosCalculadora.Models
         public double Cavali { get; set; }
 
 
-        public virtual ICollection<FrecuenciaPago> FrecuenciaPago { get; set; }
-        public virtual ICollection<DiasAño> DiasAño { get; set; }
-        public virtual ICollection<TasaInteres> TasaInteres { get; set; }
-        public virtual ICollection<Capitalizacion> Capitalizacion { get; set; }
-        public virtual ICollection<MetodoPago> MetodoPago { get; set; }
+        //public virtual ICollection<FrecuenciaPago> FrecuenciaPago { get; set; }
+        //public virtual ICollection<DiasAño> DiasAño { get; set; }
+        //public virtual ICollection<TasaInteres> TasaInteres { get; set; }
+        //public virtual ICollection<Capitalizacion> Capitalizacion { get; set; }
+        //public virtual ICollection<MetodoPago> MetodoPago { get; set; }
 
+        public virtual FrecuenciaPago FrecuenciaPago { get; set; }
+        public virtual DiasAño DiasAño { get; set; }
+        public virtual TasaInteres TasaInteres { get; set; }
+        public virtual Capitalizacion Capitalizacion { get; set; }
+        public virtual MetodoPago MetodoPago { get; set; }
         public virtual Cliente Cliente { get; set; }
 
-     
+
+
 
 
     }

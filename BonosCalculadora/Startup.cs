@@ -12,6 +12,7 @@ using BonosCalculadora.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using BonosCalculadora.Models;
 
 namespace BonosCalculadora
 {
@@ -30,6 +31,11 @@ namespace BonosCalculadora
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            
+            var connection = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<DbBonosContext>(options => options.UseSqlServer(connection));
+           
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

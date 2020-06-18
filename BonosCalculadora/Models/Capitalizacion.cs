@@ -10,13 +10,11 @@ namespace BonosCalculadora.Models
     {
         public int CapitalizacionId { get; set; }
 
-        public int? CalculadoraId { get; set; }
-
         [Required(ErrorMessage = "La capitalizacion es requerida")]
         [DataType(DataType.Text)]
         public string NCapitalizacion { get; set; }
 
-        public virtual Calculadora Calculadora { get; set; }
+        public virtual ICollection<Calculadora> Calculadora { get; set; }
 
     }
 }

@@ -10,14 +10,12 @@ namespace BonosCalculadora.Models
     {
         public int TasaInteresId { get; set; }
 
-        public int? CalculadoraId { get; set; }
-
-        [Required(ErrorMessage = "Introduzca Tasa")]
+       // [Required(ErrorMessage = "Introduzca Tasa")]
         public double Tasa { get; set; }
 
-        [Required(ErrorMessage = "Tipo de Tasa es Requerido")]
-        [DataType(DataType.Text)]
+     //   [Required(ErrorMessage = "Tipo de Tasa es Requerido")]
+     //   [DataType(DataType.Text)]
         public string Tipotasa { get; set; }
-        public virtual Calculadora Calculadora { get; set; }
+        public virtual ICollection<Calculadora> Calculadora { get; set; }
     }
 }

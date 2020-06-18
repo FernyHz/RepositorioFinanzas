@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Areas/Identity/Pages/_ViewStart.cshtml";
 }
 
 <h1>Index</h1>
@@ -14,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Dias)
+                @Html.DisplayNameFor(model => model.CalculadoraId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calculadora)
+                @Html.DisplayNameFor(model => model.Dias)
             </th>
             <th></th>
         </tr>
@@ -26,10 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Dias)
+                @Html.DisplayFor(modelItem => item.CalculadoraId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Calculadora.CalculadoraId)
+                @Html.DisplayFor(modelItem => item.Dias)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DiasAñoId">Edit</a> |

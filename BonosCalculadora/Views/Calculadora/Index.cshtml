@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Areas/Identity/Pages/_ViewStart.cshtml";
 }
 
 <h1>Index</h1>
@@ -47,6 +46,21 @@
                 @Html.DisplayNameFor(model => model.Cavali)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.FrecuenciaPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiasAño)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TasaInteres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capitalizacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetodoPago)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Cliente)
             </th>
             <th></th>
@@ -87,6 +101,21 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cavali)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrecuenciaPago.Tipofrecuencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiasAño.DiasAñoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TasaInteres.Tipotasa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capitalizacion.NCapitalizacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetodoPago.TipoMetodo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cliente.Apellidos)

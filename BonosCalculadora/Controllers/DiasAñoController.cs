@@ -21,8 +21,7 @@ namespace BonosCalculadora.Controllers
         // GET: DiasAño
         public async Task<IActionResult> Index()
         {
-            var dbBonosContext = _context.DiasAño.Include(d => d.Calculadora);
-            return View(await dbBonosContext.ToListAsync());
+            return View(await _context.DiasAño.ToListAsync());
         }
 
         // GET: DiasAño/Details/5
@@ -34,7 +33,6 @@ namespace BonosCalculadora.Controllers
             }
 
             var diasAño = await _context.DiasAño
-                .Include(d => d.Calculadora)
                 .FirstOrDefaultAsync(m => m.DiasAñoId == id);
             if (diasAño == null)
             {
@@ -47,7 +45,6 @@ namespace BonosCalculadora.Controllers
         // GET: DiasAño/Create
         public IActionResult Create()
         {
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId");
             return View();
         }
 
@@ -64,7 +61,6 @@ namespace BonosCalculadora.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", diasAño.CalculadoraId);
             return View(diasAño);
         }
 
@@ -81,7 +77,6 @@ namespace BonosCalculadora.Controllers
             {
                 return NotFound();
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", diasAño.CalculadoraId);
             return View(diasAño);
         }
 
@@ -117,7 +112,6 @@ namespace BonosCalculadora.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", diasAño.CalculadoraId);
             return View(diasAño);
         }
 
@@ -130,7 +124,6 @@ namespace BonosCalculadora.Controllers
             }
 
             var diasAño = await _context.DiasAño
-                .Include(d => d.Calculadora)
                 .FirstOrDefaultAsync(m => m.DiasAñoId == id);
             if (diasAño == null)
             {

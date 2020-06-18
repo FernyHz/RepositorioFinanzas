@@ -9,23 +9,22 @@ using BonosCalculadora.Models;
 
 namespace BonosCalculadora.Controllers
 {
-    public class MetodoPagoesController : Controller
+    public class CapitalizacionController : Controller
     {
         private readonly DbBonosContext _context;
 
-        public MetodoPagoesController(DbBonosContext context)
+        public CapitalizacionController(DbBonosContext context)
         {
             _context = context;
         }
 
-        // GET: MetodoPagoes
+        // GET: Capitalizacion
         public async Task<IActionResult> Index()
         {
-            var dbBonosContext = _context.MetodoPago.Include(m => m.Calculadora);
-            return View(await dbBonosContext.ToListAsync());
+            return View(await _context.Capitalizacion.ToListAsync());
         }
 
-        // GET: MetodoPagoes/Details/5
+        // GET: Capitalizacion/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace BonosCalculadora.Controllers
                 return NotFound();
             }
 
-            var metodoPago = await _context.MetodoPago
-                .Include(m => m.Calculadora)
-                .FirstOrDefaultAsync(m => m.MetodoPagoId == id);
-            if (metodoPago == null)
+            var capitalizacion = await _context.Capitalizacion
+                .FirstOrDefaultAsync(m => m.CapitalizacionId == id);
+            if (capitalizacion == null)
             {
                 return NotFound();
             }
 
-            return View(metodoPago);
+            return View(capitalizacion);
         }
 
-        // GET: MetodoPagoes/Create
+        // GET: Capitalizacion/Create
         public IActionResult Create()
         {
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId");
             return View();
         }
 
-        // POST: MetodoPagoes/Create
+        // POST: Capitalizacion/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MetodoPagoId,CalculadoraId,TipoMetodo")] MetodoPago metodoPago)
+        public async Task<IActionResult> Create([Bind("CapitalizacionId,NCapitalizacion")] Capitalizacion capitalizacion)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(metodoPago);
+                _context.Add(capitalizacion);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", metodoPago.CalculadoraId);
-            return View(metodoPago);
+            return View(capitalizacion);
         }
 
-        // GET: MetodoPagoes/Edit/5
+        // GET: Capitalizacion/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace BonosCalculadora.Controllers
                 return NotFound();
             }
 
-            var metodoPago = await _context.MetodoPago.FindAsync(id);
-            if (metodoPago == null)
+            var capitalizacion = await _context.Capitalizacion.FindAsync(id);
+            if (capitalizacion == null)
             {
                 return NotFound();
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", metodoPago.CalculadoraId);
-            return View(metodoPago);
+            return View(capitalizacion);
         }
 
-        // POST: MetodoPagoes/Edit/5
+        // POST: Capitalizacion/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MetodoPagoId,CalculadoraId,TipoMetodo")] MetodoPago metodoPago)
+        public async Task<IActionResult> Edit(int id, [Bind("CapitalizacionId,NCapitalizacion")] Capitalizacion capitalizacion)
         {
-            if (id != metodoPago.MetodoPagoId)
+            if (id != capitalizacion.CapitalizacionId)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace BonosCalculadora.Controllers
             {
                 try
                 {
-                    _context.Update(metodoPago);
+                    _context.Update(capitalizacion);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MetodoPagoExists(metodoPago.MetodoPagoId))
+                    if (!CapitalizacionExists(capitalizacion.CapitalizacionId))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace BonosCalculadora.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", metodoPago.CalculadoraId);
-            return View(metodoPago);
+            return View(capitalizacion);
         }
 
-        // GET: MetodoPagoes/Delete/5
+        // GET: Capitalizacion/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace BonosCalculadora.Controllers
                 return NotFound();
             }
 
-            var metodoPago = await _context.MetodoPago
-                .Include(m => m.Calculadora)
-                .FirstOrDefaultAsync(m => m.MetodoPagoId == id);
-            if (metodoPago == null)
+            var capitalizacion = await _context.Capitalizacion
+                .FirstOrDefaultAsync(m => m.CapitalizacionId == id);
+            if (capitalizacion == null)
             {
                 return NotFound();
             }
 
-            return View(metodoPago);
+            return View(capitalizacion);
         }
 
-        // POST: MetodoPagoes/Delete/5
+        // POST: Capitalizacion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var metodoPago = await _context.MetodoPago.FindAsync(id);
-            _context.MetodoPago.Remove(metodoPago);
+            var capitalizacion = await _context.Capitalizacion.FindAsync(id);
+            _context.Capitalizacion.Remove(capitalizacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MetodoPagoExists(int id)
+        private bool CapitalizacionExists(int id)
         {
-            return _context.MetodoPago.Any(e => e.MetodoPagoId == id);
+            return _context.Capitalizacion.Any(e => e.CapitalizacionId == id);
         }
     }
 }

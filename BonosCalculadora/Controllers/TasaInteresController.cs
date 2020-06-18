@@ -21,8 +21,7 @@ namespace BonosCalculadora.Controllers
         // GET: TasaInteres
         public async Task<IActionResult> Index()
         {
-            var dbBonosContext = _context.TasaInteres.Include(t => t.Calculadora);
-            return View(await dbBonosContext.ToListAsync());
+            return View(await _context.TasaInteres.ToListAsync());
         }
 
         // GET: TasaInteres/Details/5
@@ -34,7 +33,6 @@ namespace BonosCalculadora.Controllers
             }
 
             var tasaInteres = await _context.TasaInteres
-                .Include(t => t.Calculadora)
                 .FirstOrDefaultAsync(m => m.TasaInteresId == id);
             if (tasaInteres == null)
             {
@@ -47,7 +45,6 @@ namespace BonosCalculadora.Controllers
         // GET: TasaInteres/Create
         public IActionResult Create()
         {
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId");
             return View();
         }
 
@@ -56,7 +53,7 @@ namespace BonosCalculadora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TasaInteresId,CalculadoraId,Tasa,Tipotasa")] TasaInteres tasaInteres)
+        public async Task<IActionResult> Create([Bind("TasaInteresId,Tasa,Tipotasa")] TasaInteres tasaInteres)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +61,6 @@ namespace BonosCalculadora.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", tasaInteres.CalculadoraId);
             return View(tasaInteres);
         }
 
@@ -81,7 +77,6 @@ namespace BonosCalculadora.Controllers
             {
                 return NotFound();
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", tasaInteres.CalculadoraId);
             return View(tasaInteres);
         }
 
@@ -90,7 +85,7 @@ namespace BonosCalculadora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TasaInteresId,CalculadoraId,Tasa,Tipotasa")] TasaInteres tasaInteres)
+        public async Task<IActionResult> Edit(int id, [Bind("TasaInteresId,Tasa,Tipotasa")] TasaInteres tasaInteres)
         {
             if (id != tasaInteres.TasaInteresId)
             {
@@ -117,7 +112,6 @@ namespace BonosCalculadora.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CalculadoraId"] = new SelectList(_context.Calculadora, "CalculadoraId", "CalculadoraId", tasaInteres.CalculadoraId);
             return View(tasaInteres);
         }
 
@@ -130,7 +124,6 @@ namespace BonosCalculadora.Controllers
             }
 
             var tasaInteres = await _context.TasaInteres
-                .Include(t => t.Calculadora)
                 .FirstOrDefaultAsync(m => m.TasaInteresId == id);
             if (tasaInteres == null)
             {

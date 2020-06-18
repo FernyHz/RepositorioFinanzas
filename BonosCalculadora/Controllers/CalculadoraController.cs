@@ -21,7 +21,7 @@ namespace BonosCalculadora.Controllers
         // GET: Calculadora
         public async Task<IActionResult> Index()
         {
-            var dbBonosContext = _context.Calculadora.Include(c => c.Cliente);
+            var dbBonosContext = _context.Calculadora.Include(c => c.Capitalizacion).Include(c => c.Cliente).Include(c => c.DiasAño).Include(c => c.FrecuenciaPago).Include(c => c.MetodoPago).Include(c => c.TasaInteres);
             return View(await dbBonosContext.ToListAsync());
         }
 
@@ -34,7 +34,12 @@ namespace BonosCalculadora.Controllers
             }
 
             var calculadora = await _context.Calculadora
+                .Include(c => c.Capitalizacion)
                 .Include(c => c.Cliente)
+                .Include(c => c.DiasAño)
+                .Include(c => c.FrecuenciaPago)
+                .Include(c => c.MetodoPago)
+                .Include(c => c.TasaInteres)
                 .FirstOrDefaultAsync(m => m.CalculadoraId == id);
             if (calculadora == null)
             {
@@ -47,7 +52,12 @@ namespace BonosCalculadora.Controllers
         // GET: Calculadora/Create
         public IActionResult Create()
         {
+            ViewData["CapitalizacionId"] = new SelectList(_context.Capitalizacion, "CapitalizacionId", "NCapitalizacion");
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Apellidos");
+            ViewData["DiasAñoId"] = new SelectList(_context.DiasAño, "DiasAñoId", "DiasAñoId");
+            ViewData["FrecuenciaPagoId"] = new SelectList(_context.FrecuenciaPago, "FrecuenciaPagoId", "Tipofrecuencia");
+            ViewData["MetodoPagoId"] = new SelectList(_context.MetodoPago, "MetodoPagoId", "TipoMetodo");
+            ViewData["TasaInteresId"] = new SelectList(_context.TasaInteres, "TasaInteresId", "Tipotasa");
             return View();
         }
 
@@ -56,7 +66,7 @@ namespace BonosCalculadora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CalculadoraId,ClienteId,Vnominal,Vcomercial,NAños,Cok,ImRenta,FechaEmision,Prima,Estructuración,Colocación,Flotacion,Cavali")] Calculadora calculadora)
+        public async Task<IActionResult> Create([Bind("CalculadoraId,ClienteId,FrecuenciaPagoId,DiasAñoId,TasaInteresId,CapitalizacionId,MetodoPagoId,Vnominal,Vcomercial,NAños,Cok,ImRenta,FechaEmision,Prima,Estructuración,Colocación,Flotacion,Cavali")] Calculadora calculadora)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +74,12 @@ namespace BonosCalculadora.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CapitalizacionId"] = new SelectList(_context.Capitalizacion, "CapitalizacionId", "NCapitalizacion", calculadora.CapitalizacionId);
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Apellidos", calculadora.ClienteId);
+            ViewData["DiasAñoId"] = new SelectList(_context.DiasAño, "DiasAñoId", "DiasAñoId", calculadora.DiasAñoId);
+            ViewData["FrecuenciaPagoId"] = new SelectList(_context.FrecuenciaPago, "FrecuenciaPagoId", "Tipofrecuencia", calculadora.FrecuenciaPagoId);
+            ViewData["MetodoPagoId"] = new SelectList(_context.MetodoPago, "MetodoPagoId", "TipoMetodo", calculadora.MetodoPagoId);
+            ViewData["TasaInteresId"] = new SelectList(_context.TasaInteres, "TasaInteresId", "Tipotasa", calculadora.TasaInteresId);
             return View(calculadora);
         }
 
@@ -81,7 +96,12 @@ namespace BonosCalculadora.Controllers
             {
                 return NotFound();
             }
+            ViewData["CapitalizacionId"] = new SelectList(_context.Capitalizacion, "CapitalizacionId", "NCapitalizacion", calculadora.CapitalizacionId);
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Apellidos", calculadora.ClienteId);
+            ViewData["DiasAñoId"] = new SelectList(_context.DiasAño, "DiasAñoId", "DiasAñoId", calculadora.DiasAñoId);
+            ViewData["FrecuenciaPagoId"] = new SelectList(_context.FrecuenciaPago, "FrecuenciaPagoId", "Tipofrecuencia", calculadora.FrecuenciaPagoId);
+            ViewData["MetodoPagoId"] = new SelectList(_context.MetodoPago, "MetodoPagoId", "TipoMetodo", calculadora.MetodoPagoId);
+            ViewData["TasaInteresId"] = new SelectList(_context.TasaInteres, "TasaInteresId", "Tipotasa", calculadora.TasaInteresId);
             return View(calculadora);
         }
 
@@ -90,7 +110,7 @@ namespace BonosCalculadora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CalculadoraId,ClienteId,Vnominal,Vcomercial,NAños,Cok,ImRenta,FechaEmision,Prima,Estructuración,Colocación,Flotacion,Cavali")] Calculadora calculadora)
+        public async Task<IActionResult> Edit(int id, [Bind("CalculadoraId,ClienteId,FrecuenciaPagoId,DiasAñoId,TasaInteresId,CapitalizacionId,MetodoPagoId,Vnominal,Vcomercial,NAños,Cok,ImRenta,FechaEmision,Prima,Estructuración,Colocación,Flotacion,Cavali")] Calculadora calculadora)
         {
             if (id != calculadora.CalculadoraId)
             {
@@ -117,7 +137,12 @@ namespace BonosCalculadora.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CapitalizacionId"] = new SelectList(_context.Capitalizacion, "CapitalizacionId", "NCapitalizacion", calculadora.CapitalizacionId);
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Apellidos", calculadora.ClienteId);
+            ViewData["DiasAñoId"] = new SelectList(_context.DiasAño, "DiasAñoId", "DiasAñoId", calculadora.DiasAñoId);
+            ViewData["FrecuenciaPagoId"] = new SelectList(_context.FrecuenciaPago, "FrecuenciaPagoId", "Tipofrecuencia", calculadora.FrecuenciaPagoId);
+            ViewData["MetodoPagoId"] = new SelectList(_context.MetodoPago, "MetodoPagoId", "TipoMetodo", calculadora.MetodoPagoId);
+            ViewData["TasaInteresId"] = new SelectList(_context.TasaInteres, "TasaInteresId", "Tipotasa", calculadora.TasaInteresId);
             return View(calculadora);
         }
 
@@ -130,7 +155,12 @@ namespace BonosCalculadora.Controllers
             }
 
             var calculadora = await _context.Calculadora
+                .Include(c => c.Capitalizacion)
                 .Include(c => c.Cliente)
+                .Include(c => c.DiasAño)
+                .Include(c => c.FrecuenciaPago)
+                .Include(c => c.MetodoPago)
+                .Include(c => c.TasaInteres)
                 .FirstOrDefaultAsync(m => m.CalculadoraId == id);
             if (calculadora == null)
             {
