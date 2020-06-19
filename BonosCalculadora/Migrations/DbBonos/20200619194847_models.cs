@@ -13,7 +13,7 @@ namespace BonosCalculadora.Migrations.DbBonos
                 {
                     CapitalizacionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NCapitalizacion = table.Column<string>(unicode: false, maxLength: 50, nullable: false)
+                    TipoCapitalizacion = table.Column<string>(unicode: false, maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,27 +38,12 @@ namespace BonosCalculadora.Migrations.DbBonos
                 });
 
             migrationBuilder.CreateTable(
-                name: "DiasAño",
-                columns: table => new
-                {
-                    DiasAñoId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CalculadoraId = table.Column<int>(nullable: true),
-                    Dias = table.Column<int>(unicode: false, maxLength: 9, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DiasAño", x => x.DiasAñoId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "FrecuenciaPago",
                 columns: table => new
                 {
                     FrecuenciaPagoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Tipofrecuencia = table.Column<string>(unicode: false, maxLength: 15, nullable: false),
-                    Diasfrecuencia = table.Column<int>(unicode: false, maxLength: 10, nullable: false)
+                    Tipofrecuencia = table.Column<string>(unicode: false, maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,8 +69,7 @@ namespace BonosCalculadora.Migrations.DbBonos
                 {
                     TasaInteresId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Tasa = table.Column<double>(unicode: false, maxLength: 10, nullable: false),
-                    Tipotasa = table.Column<string>(unicode: false, maxLength: 15, nullable: false)
+                    TipoTasa = table.Column<string>(unicode: false, maxLength: 15, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -118,23 +102,23 @@ namespace BonosCalculadora.Migrations.DbBonos
                 {
                     CalculadoraId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClienteId = table.Column<int>(nullable: false),
                     FrecuenciaPagoId = table.Column<int>(nullable: false),
-                    DiasAñoId = table.Column<int>(nullable: false),
                     TasaInteresId = table.Column<int>(nullable: false),
                     CapitalizacionId = table.Column<int>(nullable: false),
                     MetodoPagoId = table.Column<int>(nullable: false),
-                    Vnominal = table.Column<double>(unicode: false, maxLength: 15, nullable: false),
-                    Vcomercial = table.Column<double>(unicode: false, maxLength: 15, nullable: false),
+                    Vnominal = table.Column<string>(unicode: false, maxLength: 15, nullable: false),
+                    Vcomercial = table.Column<string>(unicode: false, maxLength: 15, nullable: false),
+                    TasaDeInteres = table.Column<string>(nullable: false),
                     NAños = table.Column<int>(unicode: false, maxLength: 11, nullable: false),
-                    Cok = table.Column<double>(unicode: false, maxLength: 15, nullable: false),
-                    ImRenta = table.Column<double>(unicode: false, maxLength: 15, nullable: false),
+                    DiasAño = table.Column<int>(nullable: false),
+                    Cok = table.Column<string>(unicode: false, maxLength: 15, nullable: false),
                     fecha = table.Column<DateTime>(nullable: false),
-                    Prima = table.Column<double>(unicode: false, maxLength: 15, nullable: false),
-                    Estructuración = table.Column<double>(unicode: false, maxLength: 15, nullable: false),
-                    Colocación = table.Column<double>(unicode: false, maxLength: 15, nullable: false),
-                    Flotacion = table.Column<double>(unicode: false, maxLength: 15, nullable: false),
-                    Cavali = table.Column<double>(unicode: false, maxLength: 15, nullable: false)
+                    Prima = table.Column<string>(unicode: false, maxLength: 15, nullable: true),
+                    Estructuración = table.Column<string>(unicode: false, maxLength: 15, nullable: true),
+                    Colocación = table.Column<string>(unicode: false, maxLength: 15, nullable: true),
+                    Flotacion = table.Column<string>(unicode: false, maxLength: 15, nullable: true),
+                    Cavali = table.Column<string>(unicode: false, maxLength: 15, nullable: true),
+                    ClienteId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -146,17 +130,11 @@ namespace BonosCalculadora.Migrations.DbBonos
                         principalColumn: "CapitalizacionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Calculadora_Ciente",
+                        name: "FK_Calculadora_Cliente_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Cliente",
                         principalColumn: "ClienteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Calculadora_DiasAño",
-                        column: x => x.DiasAñoId,
-                        principalTable: "DiasAño",
-                        principalColumn: "DiasAñoId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Calculadora_FrecuenciaPago",
                         column: x => x.FrecuenciaPagoId,
@@ -186,11 +164,6 @@ namespace BonosCalculadora.Migrations.DbBonos
                 name: "IX_Calculadora_ClienteId",
                 table: "Calculadora",
                 column: "ClienteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Calculadora_DiasAñoId",
-                table: "Calculadora",
-                column: "DiasAñoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Calculadora_FrecuenciaPagoId",
@@ -223,9 +196,6 @@ namespace BonosCalculadora.Migrations.DbBonos
 
             migrationBuilder.DropTable(
                 name: "Capitalizacion");
-
-            migrationBuilder.DropTable(
-                name: "DiasAño");
 
             migrationBuilder.DropTable(
                 name: "FrecuenciaPago");

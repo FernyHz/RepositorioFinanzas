@@ -19,13 +19,16 @@
                 @Html.DisplayNameFor(model => model.Vcomercial)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TasaDeInteres)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.NAños)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cok)
+                @Html.DisplayNameFor(model => model.DiasAño)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImRenta)
+                @Html.DisplayNameFor(model => model.Cok)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaEmision)
@@ -49,9 +52,6 @@
                 @Html.DisplayNameFor(model => model.FrecuenciaPago)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DiasAño)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.TasaInteres)
             </th>
             <th>
@@ -59,9 +59,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MetodoPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente)
             </th>
             <th></th>
         </tr>
@@ -76,13 +73,16 @@
                 @Html.DisplayFor(modelItem => item.Vcomercial)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.TasaDeInteres)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.NAños)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cok)
+                @Html.DisplayFor(modelItem => item.DiasAño)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImRenta)
+                @Html.DisplayFor(modelItem => item.Cok)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaEmision)
@@ -106,19 +106,13 @@
                 @Html.DisplayFor(modelItem => item.FrecuenciaPago.Tipofrecuencia)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DiasAño.DiasAñoId)
+                @Html.DisplayFor(modelItem => item.TasaInteres.TipoTasa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TasaInteres.Tipotasa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capitalizacion.NCapitalizacion)
+                @Html.DisplayFor(modelItem => item.Capitalizacion.TipoCapitalizacion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MetodoPago.TipoMetodo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Apellidos)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CalculadoraId">Edit</a> |

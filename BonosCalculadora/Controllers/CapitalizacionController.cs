@@ -53,7 +53,7 @@ namespace BonosCalculadora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CapitalizacionId,NCapitalizacion")] Capitalizacion capitalizacion)
+        public async Task<IActionResult> Create([Bind("CapitalizacionId,TipoCapitalizacion")] Capitalizacion capitalizacion)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace BonosCalculadora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CapitalizacionId,NCapitalizacion")] Capitalizacion capitalizacion)
+        public async Task<IActionResult> Edit(int id, [Bind("CapitalizacionId,TipoCapitalizacion")] Capitalizacion capitalizacion)
         {
             if (id != capitalizacion.CapitalizacionId)
             {

@@ -13,16 +13,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ClienteId" class="control-label"></label>
-                <select asp-for="ClienteId" class ="form-control" asp-items="ViewBag.ClienteId"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="FrecuenciaPagoId" class="control-label"></label>
                 <select asp-for="FrecuenciaPagoId" class ="form-control" asp-items="ViewBag.FrecuenciaPagoId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiasAñoId" class="control-label"></label>
-                <select asp-for="DiasAñoId" class ="form-control" asp-items="ViewBag.DiasAñoId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TasaInteresId" class="control-label"></label>
@@ -47,19 +39,24 @@
                 <span asp-validation-for="Vcomercial" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TasaDeInteres" class="control-label"></label>
+                <input asp-for="TasaDeInteres" class="form-control" />
+                <span asp-validation-for="TasaDeInteres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="NAños" class="control-label"></label>
                 <input asp-for="NAños" class="form-control" />
                 <span asp-validation-for="NAños" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="DiasAño" class="control-label"></label>
+                <input asp-for="DiasAño" class="form-control" />
+                <span asp-validation-for="DiasAño" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Cok" class="control-label"></label>
                 <input asp-for="Cok" class="form-control" />
                 <span asp-validation-for="Cok" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImRenta" class="control-label"></label>
-                <input asp-for="ImRenta" class="form-control" />
-                <span asp-validation-for="ImRenta" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FechaEmision" class="control-label"></label>

@@ -21,7 +21,6 @@ namespace BonosCalculadora.Models
         public virtual DbSet<Historial> Historial { get; set; }
         public virtual DbSet<Calculadora> Calculadora { get; set; }
         public virtual DbSet<FrecuenciaPago> FrecuenciaPago { get; set; }
-        public virtual DbSet<DiasAño> DiasAño { get; set; }
         public virtual DbSet<Capitalizacion> Capitalizacion { get; set; }
         public virtual DbSet<TasaInteres> TasaInteres { get; set; }
         public virtual DbSet<MetodoPago> MetodoPago { get; set; }
@@ -72,23 +71,14 @@ namespace BonosCalculadora.Models
             });
             modelBuilder.Entity<Capitalizacion>(entity => 
             {
-                entity.Property(c => c.NCapitalizacion)
+                entity.Property(c => c.TipoCapitalizacion)
                       .HasMaxLength(50)
                       .IsUnicode(false);
 
             });
-            modelBuilder.Entity<DiasAño>(entity => 
-            {
-                entity.Property(c => c.Dias)
-                     .HasMaxLength(9)
-                     .IsUnicode(false);
 
-            });
             modelBuilder.Entity<FrecuenciaPago>(entity =>
             {
-                entity.Property(c => c.Diasfrecuencia)
-                   .HasMaxLength(10)
-                   .IsUnicode(false);
 
                 entity.Property(c => c.Tipofrecuencia)
                        .HasMaxLength(15)
@@ -101,19 +91,12 @@ namespace BonosCalculadora.Models
                   .HasMaxLength(15)
                   .IsUnicode(false);
 
-
             });
             modelBuilder.Entity<TasaInteres>(entity => 
-            {
-                entity.Property(c => c.Tasa)
-                 .HasMaxLength(10)
-                 .IsUnicode(false);
-
-                entity.Property(c => c.Tipotasa)
+            {               
+                entity.Property(c => c.TipoTasa)
                  .HasMaxLength(15)
                  .IsUnicode(false);
-
-
             });
             modelBuilder.Entity<Calculadora>(entity=>
             {
@@ -130,10 +113,6 @@ namespace BonosCalculadora.Models
                    .IsUnicode(false);
 
                 entity.Property(e => e.Cok)
-                   .HasMaxLength(15)
-                   .IsUnicode(false);
-
-                entity.Property(e => e.ImRenta)
                    .HasMaxLength(15)
                    .IsUnicode(false);
 
@@ -161,11 +140,6 @@ namespace BonosCalculadora.Models
                    .IsUnicode(false);
 
 
-                entity.HasOne(d => d.Cliente)
-                       .WithMany(p => p.Calculadora)
-                       .HasForeignKey(d => d.ClienteId)
-                       .HasConstraintName("FK_Calculadora_Ciente");
-
                 entity.HasOne(d => d.Capitalizacion)
                     .WithMany(p => p.Calculadora)
                     .HasForeignKey(d => d.CapitalizacionId)
@@ -175,11 +149,6 @@ namespace BonosCalculadora.Models
                     .WithMany(p => p.Calculadora)
                     .HasForeignKey(d => d.FrecuenciaPagoId)
                     .HasConstraintName("FK_Calculadora_FrecuenciaPago");
-
-                entity.HasOne(d => d.DiasAño)
-                    .WithMany(p => p.Calculadora)
-                    .HasForeignKey(d => d.DiasAñoId)
-                    .HasConstraintName("FK_Calculadora_DiasAño");
 
                 entity.HasOne(d => d.TasaInteres)
                     .WithMany(p => p.Calculadora)

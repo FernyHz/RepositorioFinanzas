@@ -6,115 +6,74 @@
 
 <h1>Details</h1>
 
-<div>
+<form>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Frecuencia del Cupon: </label>
+        <div class="col-sm-10">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Frec</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Dias de Capitalizacion: </label>
+        <div class="col-sm-10">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Capi</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Periodos Por Año: </label>
+        <div class="col-sm-10">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Peri</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Periodos Totales: </label>
+        <div class="col-sm-10">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.PeriT</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Tasa Efectiva Anual: </label>
+        <div class="col-sm-10">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Tasa</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Tasa Efectiva Del Periodo: </label>
+        <div class="col-sm-10">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.TasaP</label>
+        </div>
+    </div>
+
+</form>
+@*<div>
     <h4>Calculadora</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vnominal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vnominal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vcomercial)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vcomercial)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NAños)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NAños)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cok)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cok)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImRenta)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImRenta)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaEmision)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaEmision)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prima)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prima)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estructuración)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estructuración)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Colocación)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Colocación)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Flotacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Flotacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cavali)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cavali)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FrecuenciaPago)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FrecuenciaPago.Tipofrecuencia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiasAño)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiasAño.DiasAñoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TasaInteres)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TasaInteres.Tipotasa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Capitalizacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capitalizacion.NCapitalizacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MetodoPago)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MetodoPago.TipoMetodo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.Apellidos)
-        </dd>
-    </dl>
-</div>
-<div>
+    <div class="row">
+        <div class="col-md-4">
+            <dt class="col-sm-2">
+                Frecuencia del Cupon
+            </dt>
+            <dd class="col-sm-2">
+                @ViewBag.Frec
+            </dd>
+            <dt class="col-sm-2">
+                Dias de Capitalizacion
+            </dt>
+            <dd class="col-sm-2">
+                @ViewBag.Capi
+            </dd>
+            <dt class="col-sm-2">
+                Numero de Periodos Por Año
+            </dt>
+            <dd class="col-sm-2">
+                @ViewBag.Peri
+            </dd>
+
+            </dl>
+        </div>
+    </div>
+ </div>*@
+@*<div>
     <a asp-action="Edit" asp-route-id="@Model.CalculadoraId">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@

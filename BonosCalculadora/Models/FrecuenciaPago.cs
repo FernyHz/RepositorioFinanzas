@@ -13,8 +13,8 @@ namespace BonosCalculadora.Models
         [DataType(DataType.Text)]
         public string Tipofrecuencia { get; set; }
 
-        [Required(ErrorMessage = "Dias de la frecuencia necesarios")]
-        public int Diasfrecuencia { get; set; }
+       // [Required(ErrorMessage = "Dias de la frecuencia necesarios")]
+       // public int Diasfrecuencia { get; set; }
 
         public virtual ICollection<Calculadora> Calculadora { get; set; }
     }

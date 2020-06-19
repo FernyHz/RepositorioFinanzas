@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonosCalculadora.Migrations.DbBonos
 {
     [DbContext(typeof(DbBonosContext))]
-    [Migration("20200618000732_models")]
+    [Migration("20200619194847_models")]
     partial class models
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,29 +31,30 @@ namespace BonosCalculadora.Migrations.DbBonos
                     b.Property<int>("CapitalizacionId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Cavali")
-                        .HasColumnType("float")
+                    b.Property<string>("Cavali")
+                        .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
 
-                    b.Property<int>("ClienteId")
+                    b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Cok")
-                        .HasColumnType("float")
+                    b.Property<string>("Cok")
+                        .IsRequired()
+                        .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
 
-                    b.Property<double>("Colocación")
-                        .HasColumnType("float")
+                    b.Property<string>("Colocación")
+                        .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
 
-                    b.Property<int>("DiasAñoId")
+                    b.Property<int>("DiasAño")
                         .HasColumnType("int");
 
-                    b.Property<double>("Estructuración")
-                        .HasColumnType("float")
+                    b.Property<string>("Estructuración")
+                        .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
 
@@ -61,18 +62,13 @@ namespace BonosCalculadora.Migrations.DbBonos
                         .HasColumnName("fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Flotacion")
-                        .HasColumnType("float")
+                    b.Property<string>("Flotacion")
+                        .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
 
                     b.Property<int>("FrecuenciaPagoId")
                         .HasColumnType("int");
-
-                    b.Property<double>("ImRenta")
-                        .HasColumnType("float")
-                        .HasMaxLength(15)
-                        .IsUnicode(false);
 
                     b.Property<int>("MetodoPagoId")
                         .HasColumnType("int");
@@ -82,21 +78,27 @@ namespace BonosCalculadora.Migrations.DbBonos
                         .HasMaxLength(11)
                         .IsUnicode(false);
 
-                    b.Property<double>("Prima")
-                        .HasColumnType("float")
+                    b.Property<string>("Prima")
+                        .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
+
+                    b.Property<string>("TasaDeInteres")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TasaInteresId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Vcomercial")
-                        .HasColumnType("float")
+                    b.Property<string>("Vcomercial")
+                        .IsRequired()
+                        .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
 
-                    b.Property<double>("Vnominal")
-                        .HasColumnType("float")
+                    b.Property<string>("Vnominal")
+                        .IsRequired()
+                        .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
 
@@ -105,8 +107,6 @@ namespace BonosCalculadora.Migrations.DbBonos
                     b.HasIndex("CapitalizacionId");
 
                     b.HasIndex("ClienteId");
-
-                    b.HasIndex("DiasAñoId");
 
                     b.HasIndex("FrecuenciaPagoId");
 
@@ -124,7 +124,7 @@ namespace BonosCalculadora.Migrations.DbBonos
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("NCapitalizacion")
+                    b.Property<string>("TipoCapitalizacion")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
@@ -174,37 +174,12 @@ namespace BonosCalculadora.Migrations.DbBonos
                     b.ToTable("Cliente");
                 });
 
-            modelBuilder.Entity("BonosCalculadora.Models.DiasAño", b =>
-                {
-                    b.Property<int>("DiasAñoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CalculadoraId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Dias")
-                        .HasColumnType("int")
-                        .HasMaxLength(9)
-                        .IsUnicode(false);
-
-                    b.HasKey("DiasAñoId");
-
-                    b.ToTable("DiasAño");
-                });
-
             modelBuilder.Entity("BonosCalculadora.Models.FrecuenciaPago", b =>
                 {
                     b.Property<int>("FrecuenciaPagoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Diasfrecuencia")
-                        .HasColumnType("int")
-                        .HasMaxLength(10)
-                        .IsUnicode(false);
 
                     b.Property<string>("Tipofrecuencia")
                         .IsRequired()
@@ -264,13 +239,7 @@ namespace BonosCalculadora.Migrations.DbBonos
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Tasa")
-                        .HasColumnType("float")
-                        .HasMaxLength(10)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Tipotasa")
-                        .IsRequired()
+                    b.Property<string>("TipoTasa")
                         .HasColumnType("varchar(15)")
                         .HasMaxLength(15)
                         .IsUnicode(false);
@@ -289,19 +258,9 @@ namespace BonosCalculadora.Migrations.DbBonos
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BonosCalculadora.Models.Cliente", "Cliente")
+                    b.HasOne("BonosCalculadora.Models.Cliente", null)
                         .WithMany("Calculadora")
-                        .HasForeignKey("ClienteId")
-                        .HasConstraintName("FK_Calculadora_Ciente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BonosCalculadora.Models.DiasAño", "DiasAño")
-                        .WithMany("Calculadora")
-                        .HasForeignKey("DiasAñoId")
-                        .HasConstraintName("FK_Calculadora_DiasAño")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClienteId");
 
                     b.HasOne("BonosCalculadora.Models.FrecuenciaPago", "FrecuenciaPago")
                         .WithMany("Calculadora")

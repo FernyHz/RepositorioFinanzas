@@ -9,11 +9,9 @@ namespace BonosCalculadora.Models
     public partial class Capitalizacion
     {
         public int CapitalizacionId { get; set; }
-
         [Required(ErrorMessage = "La capitalizacion es requerida")]
         [DataType(DataType.Text)]
-        public string NCapitalizacion { get; set; }
-
+        public string TipoCapitalizacion { get; set; }
         public virtual ICollection<Calculadora> Calculadora { get; set; }
 
     }
