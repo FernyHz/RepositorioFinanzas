@@ -18,8 +18,7 @@ namespace BonosCalculadora.Controllers
         {
             _context = context;
         }
-      
-
+     
             
         // GET: Calculadora
         public async Task<IActionResult> Index()

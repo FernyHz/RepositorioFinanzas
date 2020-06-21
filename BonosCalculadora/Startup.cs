@@ -36,7 +36,6 @@ namespace BonosCalculadora
                     Configuration.GetConnectionString("DefaultConnection")));
             
             var connection = Configuration.GetConnectionString("DefaultConnection");
-
             services.AddDbContext<DbBonosContext>(options => options.UseSqlServer(connection));
            
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
