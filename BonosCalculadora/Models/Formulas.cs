@@ -10,25 +10,25 @@ namespace BonosCalculadora.Models
     {
         public int FormulasId { get; set; }
 
-       // public static List<double> resultados()
-       // {
-       //     List<double> objetos = new List<double>();
-       //     double ctp = CalcularTotalPeriodos(360, 180);
-       //     double ccib = CalcularCostesInicalesBonista(0.5, 0.5, 0.7);
-       //     objetos.Add(ctp);
-       //     objetos.Add(ccib);
-       //     return objetos;
-       // }
-     //  static public double el(double num)
-     //   {
-     //       double a;
-     //       a = Math.Pow(num, 2);
-     //       return a;
-     //   }
+        public static List<double> resultados()
+        {
+            List<double> objetos = new List<double>();
+            double ctp = CalcularTotalPeriodos(360, 180);
+            double ccib = CalcularCostesInicalesBonista(0.5, 0.5, 0.7);
+            objetos.Add(ctp);
+            objetos.Add(ccib);
+            return objetos;
+        }
+        //tatic public double el(double num)
+        //   {
+        //       double a;
+        //       a = Math.Pow(num, 2);
+        //       return a;
+        //   }
 
         static public int DevolverFrecuenciaPago(string frecuencia)
         {
-            if (frecuencia == "Semestral")  return 180;
+            if (frecuencia == "Semestral") return 180;
             if (frecuencia == "Mensual") return 30;
             if (frecuencia == "Bimestral") return 60;
             if (frecuencia == "Trimestral") return 90;
@@ -52,7 +52,7 @@ namespace BonosCalculadora.Models
 
         }
 
-        static public int CalcularTotalPeriodos(int naños,int npa)
+        static public int CalcularTotalPeriodos(int naños, int npa)
         {
             int periodos;
             periodos = naños * npa;
@@ -72,12 +72,12 @@ namespace BonosCalculadora.Models
             if (tasa == "Efectiva")
             {
 
-                nuevatasa = Math.Round(valortasa,5);
+                nuevatasa = Math.Round(valortasa, 5);
                 return nuevatasa;
             }
             else if (tasa == "Nominal")
             {
-                nuevatasa = Math.Round(Math.Pow(1 + valortasa / (diasAño / diasCapi), diasAño / diasCapi) - 1,5);
+                nuevatasa = Math.Round(Math.Pow(1 + valortasa / (diasAño / diasCapi), diasAño / diasCapi) - 1, 5);
                 return nuevatasa;
             }
             else
@@ -89,30 +89,35 @@ namespace BonosCalculadora.Models
         static public double CalcularTasaEfectivaDelPeriodo(double valortasa, double frec, double diasAño)
         {
             double tasa;
-            tasa = Math.Round(Math.Pow(1 + valortasa, (frec / diasAño))-1,5);
+            tasa = Math.Round(Math.Pow(1 + valortasa, (frec / diasAño)) - 1, 5);
             return tasa;
         }
-       static public double CalcularCokPeriodo(double cok, int frec, int dias)
+        static public double CalcularCokPeriodo(double cok, double frec, double dias)
         {
             double cokperiodo;
-            cokperiodo = Math.Pow(1 + cok, frec / dias);
+            cokperiodo = Math.Round(Math.Pow(1 + cok, frec / dias) - 1, 5);
             return cokperiodo;
         }
-        static public double CalcularCostesInicialesEmisor(double pEst, double pCol, double pFlo, double pCAVA,double VCom)
+        static public double CalcularCostesInicialesEmisor(double pEst, double pCol, double pFlo, double pCAVA, double VCom)
         {
             double costes;
-            costes = (pEst + pCol + pCAVA + pFlo) * VCom;
+            costes = Math.Round((pEst + pCol + pCAVA + pFlo) * VCom, 2);
             return costes;
         }
 
         static public double CalcularCostesInicalesBonista(double pFlo, double pCAVA, double VCom)
         {
             double costes;
-            costes = (pFlo + pCAVA) * VCom;
+            costes = Math.Round((pFlo + pCAVA) * VCom, 2);
             return costes;
         }
 
+        static public List<Objeto> americano(Objeto ayuda) {
 
+         //   ayuda.numperiodo = 0 ;
+            
+            return null; 
+        }
 
     }
 }

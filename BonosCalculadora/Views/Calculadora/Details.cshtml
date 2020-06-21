@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Resultado de la estructuración del Bono</h1>
 
 <form>
     <div class="form-group row">
@@ -43,8 +43,66 @@
             <label type="text" readonly class="form-control-plaintext"> @ViewBag.TasaP</label>
         </div>
     </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Cok Del Periodo: </label>
+        <div class="col-sm-2">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.CokP</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Costes Iniciales Emisor: </label>
+        <div class="col-sm-2">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Cie</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Costes Iniciales Bonista: </label>
+        <div class="col-sm-2">
+            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Cib</label>
+        </div>
+    </div>
 
 </form>
+
+<table class="table table-responsive table-bordered table-sm ">
+    <thead>
+        <tr class="table-warning">
+            <th>N°</th>
+            <th>Inflacion Anual</th>
+            <th>Inflacion Periodo</th>
+            <th>Bono</th>
+            <th>Bono Indexado</th>
+            <th>Cupon (Interes)</th>
+            <th>Cuota</th>
+            <th>Amortizacion</th>
+            <th>Prima</th>
+            <th>Escudo</th>
+            <th>Flujo Emisor</th>
+            <th>Flujo Emisor c/Escudo</th>
+            <th>Flujo Bonista</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.listahi)
+        {
+        <tr>    
+            <td>@item.numero</td>
+            <td>@item.infanual</td>
+            <td>@item.infperiodo</td>
+            <td>@item.bono</td>
+            <td>@item.bonoindexado</td>
+            <td>@item.interes</td>
+            <td>@item.cuota</td>
+            <td>@item.amort</td>
+            <td>@item.prima</td>
+            <td>@item.escudo</td>
+            <td>@item.femisor</td>
+            <td>@item.femiescu</td>
+            <td>@item.fbonista</td>
+        </tr>
+        }
+    </tbody>
+</table>
 @*<div>
     <h4>Calculadora</h4>
     <hr />

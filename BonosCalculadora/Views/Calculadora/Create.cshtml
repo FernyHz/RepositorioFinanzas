@@ -8,25 +8,13 @@
 
 <h4>Calculadora</h4>
 <hr />
-<div class="row">
+<div class="row ">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form  asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FrecuenciaPagoId" class="control-label"></label>
-                <select asp-for="FrecuenciaPagoId" class ="form-control" asp-items="ViewBag.FrecuenciaPagoId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="TasaInteresId" class="control-label"></label>
-                <select asp-for="TasaInteresId" class ="form-control" asp-items="ViewBag.TasaInteresId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="CapitalizacionId" class="control-label"></label>
-                <select asp-for="CapitalizacionId" class ="form-control" asp-items="ViewBag.CapitalizacionId"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="MetodoPagoId" class="control-label"></label>
-                <select asp-for="MetodoPagoId" class ="form-control" asp-items="ViewBag.MetodoPagoId"></select>
+                <select asp-for="MetodoPagoId" class="form-control" asp-items="ViewBag.MetodoPagoId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Vnominal" class="control-label"></label>
@@ -39,19 +27,31 @@
                 <span asp-validation-for="Vcomercial" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TasaDeInteres" class="control-label"></label>
-                <input asp-for="TasaDeInteres" class="form-control" />
-                <span asp-validation-for="TasaDeInteres" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="NAños" class="control-label"></label>
                 <input asp-for="NAños" class="form-control" />
                 <span asp-validation-for="NAños" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="FrecuenciaPagoId" class="control-label"></label>
+                <select asp-for="FrecuenciaPagoId" class="form-control" asp-items="ViewBag.FrecuenciaPagoId"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="DiasAño" class="control-label"></label>
                 <input asp-for="DiasAño" class="form-control" />
                 <span asp-validation-for="DiasAño" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TasaInteresId" class="control-label"></label>
+                <select asp-for="TasaInteresId" class="form-control" asp-items="ViewBag.TasaInteresId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CapitalizacionId" class="control-label"></label>
+                <select asp-for="CapitalizacionId" class="form-control" asp-items="ViewBag.CapitalizacionId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TasaDeInteres" class="control-label"></label>
+                <input asp-for="TasaDeInteres" class="form-control" />
+                <span asp-validation-for="TasaDeInteres" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cok" class="control-label"></label>
@@ -63,6 +63,7 @@
                 <input asp-for="FechaEmision" class="form-control" />
                 <span asp-validation-for="FechaEmision" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Prima" class="control-label"></label>
                 <input asp-for="Prima" class="form-control" />
@@ -93,12 +94,13 @@
             </div>
         </form>
     </div>
-</div>
+ </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

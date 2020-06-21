@@ -9,23 +9,23 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
+<table class="table-bordered  table-responsive ">
+    <thead >
+        <tr class="table-info">
+            <th >
                 @Html.DisplayNameFor(model => model.Vnominal)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Vcomercial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TasaDeInteres)
+                Tasa
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NAños)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DiasAño)
+                Dias (Año)     
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cok)
@@ -115,9 +115,9 @@
                 @Html.DisplayFor(modelItem => item.MetodoPago.TipoMetodo)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CalculadoraId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CalculadoraId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CalculadoraId">Delete</a>
+                <small> <a asp-action="Edit" asp-route-id="@item.CalculadoraId">Edit</a></small> 
+                <small><a asp-action="Details" asp-route-id="@item.CalculadoraId">Details</a></small> 
+                <small> <a asp-action="Delete" asp-route-id="@item.CalculadoraId">Delete</a></small>
             </td>
         </tr>
 }

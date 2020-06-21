@@ -12,12 +12,15 @@ namespace BonosCalculadora.Controllers
     public class CalculadoraController : Controller
     {
         private readonly DbBonosContext _context;
+        public double ola { get; set; }
 
         public CalculadoraController(DbBonosContext context)
         {
             _context = context;
         }
+      
 
+            
         // GET: Calculadora
         public async Task<IActionResult> Index()
         {
@@ -43,19 +46,76 @@ namespace BonosCalculadora.Controllers
             {
                 return NotFound();
             }
+            //Para resultados de Estruct. del Bono
             int frec = Formulas.DevolverFrecuenciaPago(calculadora.FrecuenciaPago.Tipofrecuencia);
             int dc = Formulas.DevolverDiasCapitalizacion(calculadora.Capitalizacion.TipoCapitalizacion);
             int ctp = Formulas.CalcularPeriodosporAño(calculadora.DiasAño, frec);
             int npa = Formulas.CalcularTotalPeriodos(calculadora.NAños, ctp);
-            double efe = Formulas.CalcularTasaEfectivaAnual(calculadora.TasaInteres.TipoTasa, Double.Parse(calculadora.TasaDeInteres),calculadora.DiasAño,dc);
-            double efp = Formulas.CalcularTasaEfectivaDelPeriodo(efe, frec, calculadora.DiasAño);
+            double efa = Formulas.CalcularTasaEfectivaAnual(calculadora.TasaInteres.TipoTasa, Double.Parse(calculadora.TasaDeInteres),calculadora.DiasAño,dc);
+            double efp = Formulas.CalcularTasaEfectivaDelPeriodo(efa, frec, calculadora.DiasAño);
+            double ck = Formulas.CalcularCokPeriodo(Double.Parse(calculadora.Cok), frec, calculadora.DiasAño);
+            double cie = Formulas.CalcularCostesInicialesEmisor(Double.Parse(calculadora.Estructuración), Double.Parse(calculadora.Colocación)
+                , Double.Parse(calculadora.Flotacion), Double.Parse(calculadora.Cavali), Double.Parse(calculadora.Vcomercial));
+            double cib = Formulas.CalcularCostesInicalesBonista(Double.Parse(calculadora.Flotacion), Double.Parse(calculadora.Cavali), Double.Parse(calculadora.Vcomercial));
 
             ViewBag.Capi= dc;
             ViewBag.Peri = ctp;
             ViewBag.Frec = frec;
             ViewBag.PeriT = npa;
-            ViewBag.Tasa = efe;
+            ViewBag.Tasa = efa;
             ViewBag.TasaP = efp;
+            ViewBag.CokP = ck;
+            ViewBag.Cie = cie;
+            ViewBag.Cib = cib;
+
+            //variables
+            double flujoemi = Double.Parse(calculadora.Vcomercial) - cie;
+            double flujobonista = Double.Parse(calculadora.Vcomercial) - cib; 
+
+            List <Objeto> hi = new List<Objeto>();
+            ola = 5;
+            
+            for (int i = 0; i < npa; i++)
+            {
+                
+                Objeto ob = new Objeto();
+                if (i == 0)
+                {
+                    ob.numero = 0;
+                    ob.infanual = 0;
+                    ob.infperiodo = 0;
+                    ob.bono = 0;
+                    ob.bonoindexado = 0;
+                    ob.interes = 0;
+                    ob.cuota = 0;
+                    ob.amort = 0;          
+                    ob.prima = 0;
+                    ob.escudo = 0;
+                    ob.femisor = flujoemi;
+                    ob.femiescu = flujoemi;
+                    ob.fbonista = flujobonista;
+              
+                }
+                else
+                {
+                    ob.numero = i;
+                    ob.infanual = i;
+                    ob.infperiodo = i;
+                    ob.bono = ola;
+                    ob.bonoindexado = i;
+                    ob.interes = i;
+                    ob.cuota = i;
+                    ob.amort = i;
+                    ob.prima = i;
+                    ob.escudo = i;
+                    ob.femisor = i;
+                    ob.femiescu = i;
+                    ob.fbonista = i;
+                }
+                //  ola += ob.a4;
+                hi.Add(ob);           
+            }
+            ViewBag.listahi = hi;
 
             return View(calculadora);
         }
