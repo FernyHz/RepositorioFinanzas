@@ -29,7 +29,7 @@ namespace BonosCalculadora.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-T5IR78P\\PIERO;Database=DbBonos;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-I7IQU9M\\MSSQLSERVER01;Database=DbBonos;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
