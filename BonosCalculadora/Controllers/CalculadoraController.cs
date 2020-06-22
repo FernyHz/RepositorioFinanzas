@@ -69,52 +69,76 @@ namespace BonosCalculadora.Controllers
 
             //variables
             double flujoemi = Double.Parse(calculadora.Vcomercial) - cie;
-            double flujobonista = Double.Parse(calculadora.Vcomercial) - cib; 
+            double flujobonista = -(Double.Parse(calculadora.Vcomercial)) - cib;
+            double vnom = Double.Parse(calculadora.Vnominal);
 
             List <Objeto> hi = new List<Objeto>();
-            ola = 5;
+            ola = 0;
             
-            for (int i = 0; i < npa; i++)
+            for (int i = 0; i <= npa; i++)
             {
                 
                 Objeto ob = new Objeto();
-                if (i == 0)
+                if (i < npa)
                 {
-                    ob.numero = 0;
-                    ob.infanual = 0;
-                    ob.infperiodo = 0;
-                    ob.bono = 0;
-                    ob.bonoindexado = 0;
-                    ob.interes = 0;
-                    ob.cuota = 0;
-                    ob.amort = 0;          
-                    ob.prima = 0;
-                    ob.escudo = 0;
-                    ob.femisor = flujoemi;
-                    ob.femiescu = flujoemi;
-                    ob.fbonista = flujobonista;
-              
+                    if (i == 0)
+                    {
+                        ob.numero = 0;
+                        ob.infanual = 0;
+                        ob.infperiodo = 0;
+                        ob.bono = 0;
+                        ob.bonoindexado = 0;
+                        ob.interes = 0;
+                        ob.cuota = 0;
+                        ob.amort = 0;
+                        ob.prima = 0;
+                        ob.escudo = 0;
+                        ob.femisor = flujoemi;
+                        ob.femiescu = flujoemi;
+                        ob.fbonista = flujobonista;
+                        ola += ob.escudo;
+                    }
+                    else
+                    {
+
+                        ob.numero = i;
+                        ob.infanual = 0;
+                        ob.infperiodo = 0;
+                        ob.bono = vnom;
+                        ob.bonoindexado = Math.Round(ob.bono * (1 + ob.infperiodo), 2);
+                        ob.interes = -Math.Round(ob.bonoindexado * efp, 2);
+                        ob.cuota = ob.interes;
+                        ob.amort = 0;
+                        ob.prima = 0;
+                        ob.escudo = -Math.Round(ob.interes * 0.30, 2);
+                        ob.femisor = ob.interes;
+                        ob.femiescu = Math.Round(ob.escudo + ob.femisor, 2);
+                        ob.fbonista = -ob.femisor;
+                        ola += ob.escudo;
+                    }
                 }
                 else
                 {
                     ob.numero = i;
-                    ob.infanual = i;
-                    ob.infperiodo = i;
-                    ob.bono = ola;
-                    ob.bonoindexado = i;
-                    ob.interes = i;
-                    ob.cuota = i;
-                    ob.amort = i;
-                    ob.prima = i;
-                    ob.escudo = i;
-                    ob.femisor = i;
-                    ob.femiescu = i;
-                    ob.fbonista = i;
+                    ob.infanual = 0;
+                    ob.infperiodo = 0;
+                    ob.bono = vnom;
+                    ob.bonoindexado = Math.Round(ob.bono * (1 + ob.infperiodo), 2);
+                    ob.interes = -Math.Round(ob.bonoindexado * efp, 2);
+                    ob.cuota = -ob.bono+ob.interes;
+                    ob.amort = -ob.bono;
+                    ob.prima = -Math.Round(Double.Parse(calculadora.Prima)*ob.bonoindexado,2);
+                    ob.escudo = -Math.Round(ob.interes * 0.30, 2);
+                    ob.femisor = -ob.bonoindexado+ob.interes+ob.prima;
+                    ob.femiescu = ob.femisor+ob.escudo;
+                    ob.fbonista = -ob.femisor;
                 }
+                
                 //  ola += ob.a4;
                 hi.Add(ob);           
             }
             ViewBag.listahi = hi;
+            //ViewBag.a = ola;
 
             return View(calculadora);
         }
