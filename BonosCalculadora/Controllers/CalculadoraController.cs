@@ -53,6 +53,7 @@ namespace BonosCalculadora.Controllers
             {
                 return NotFound();
             }
+
             //Para resultados de Estruct. del Bono
             int frec = Formulas.DevolverFrecuenciaPago(calculadora.FrecuenciaPago.Tipofrecuencia);
             int dc = Formulas.DevolverDiasCapitalizacion(calculadora.Capitalizacion.TipoCapitalizacion);
@@ -64,104 +65,76 @@ namespace BonosCalculadora.Controllers
             double cie = Formulas.CalcularCostesInicialesEmisor(Double.Parse(calculadora.Estructuración), Double.Parse(calculadora.Colocación)
             , Double.Parse(calculadora.Flotacion), Double.Parse(calculadora.Cavali), Double.Parse(calculadora.Vcomercial));
             double cib = Formulas.CalcularCostesInicalesBonista(Double.Parse(calculadora.Flotacion), Double.Parse(calculadora.Cavali), Double.Parse(calculadora.Vcomercial));
-          //  double o = Formulas.tir();
-          //   double o = Formulas.cuotaFrances(1440000, 0.044030651, 8);
             ViewBag.Capi = dc;
             ViewBag.Peri = ctp;
             ViewBag.Frec = frec;
             ViewBag.PeriT = npa;
             ViewBag.Tasa = efa;
             ViewBag.TasaP = efp;
-            ViewBag.CokP = ck;
+            ViewBag.CokP = Round(ck,5);
             ViewBag.Cie = cie;
             ViewBag.Cib = cib;
-           // ViewBag.c = o;
-
             //variables
-            double flujoemi = Double.Parse(calculadora.Vcomercial) - cie;
-            double flujobonista = -(Double.Parse(calculadora.Vcomercial)) - cib;
             double vnom = Double.Parse(calculadora.Vnominal);
             List<Objeto> hi = new List<Objeto>();
             if (calculadora.MetodoPago.TipoMetodo == "Americano")
             {
-                // ola = 0;
                 aux = 0;
-                double[] arraytir = new double[npa+1];
+                double[] arraytir = new double[npa + 1];
+                double[] arrayvan = new double[npa + 1];
 
                 for (int i = 0; i <= npa; i++)
                 {
                     Objeto ob = new Objeto();
-
                     ob.numero = i;
                     ob.infanual = 0;
                     ob.infperiodo = 0;
                     ob.bono = Formulas.Bono(i, npa, Double.Parse(calculadora.Vnominal));
-                    ob.bonoindexado = Formulas.BonoIndexado(i, npa, ob.bono, ob.bonoindexado);
+                    ob.bonoindexado = Formulas.BonoIndexado(i, npa, ob.bono, ob.infperiodo);
                     ob.interes = Formulas.CalcularInteres(i, npa, ob.bonoindexado, efp);
                     ob.cuota = Formulas.CuotaAmericano(ob.bono, i, npa, ob.interes, ob.amort);
                     ob.amort = Formulas.AmortizacionAmericano(i, npa, ob.bono);
-                    ob.prima = Formulas.Prima(i, npa, Double.Parse(calculadora.Prima), ob.bonoindexado);
+                    ob.prima = Formulas.Prima(i, npa, Double.Parse(calculadora.Prima), vnom);
                     ob.escudo = Formulas.Escudo(i, npa, ob.interes);
-                    ob.femisor = Formulas.FEmisor(i, npa, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie); ;
+                    ob.femisor = Formulas.FEmisor(i, npa, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
                     ob.femiescu = Formulas.FEmisorEscudo(i, npa, ob.escudo, ob.femisor);
-                    ob.fbonista = Formulas.FBonista(i, npa, Double.Parse(calculadora.Vcomercial), cib, ob.femisor); 
-                    hi.Add(ob);
+                    ob.fbonista = Formulas.FBonista(i, npa, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
                     arraytir[i] = ob.fbonista;
+                    arrayvan[i] = ob.fbonista; 
+
+                    hi.Add(ob);
                 }
-               // ViewBag.listahi = hi;
-               double tir =Round(Formulas.calculartir(arraytir),4);
-               ViewBag.t = tir;
+                double tir = Formulas.calculartir(arraytir);
+                double[] arrayvanreducido = Formulas.ReduceTamaño(arrayvan);
+                double van = Formulas.CalcularVAN(ck,arrayvanreducido);
+              
+                ViewBag.t = tir;
+                ViewBag.vna = van;
             }
             else if (calculadora.MetodoPago.TipoMetodo == "Aleman")
             {
                 //para calcular la bajada del saldo inicial del bono
-                aux = vnom;             
+                aux = vnom;
                 for (int i = 0; i <= npa; i++)
-                {                 
+                {
                     Objeto ob = new Objeto();
-                    if (i <= npa) 
-                    {
-                        if (i == 0)
-                        {
-                            ob.numero = 0;
-                            ob.infanual = 0;
-                            ob.infperiodo = 0;
-                            ob.bono = 0;
-                            ob.bonoindexado = 0;
-                            ob.interes = 0;
-                            ob.cuota = 0;
-                            ob.amort = 0;
-                            ob.prima = 0;
-                            ob.escudo = 0;
-                            ob.femisor = flujoemi;
-                            ob.femiescu = flujoemi;
-                            ob.fbonista = flujobonista;
-                            // ola += ob.escudo;
-                        }
-                        else
-                        {
-                            ob.numero = i;
-                            ob.infanual = 0;
-                            ob.infperiodo = 0;
-                            ob.bono = aux;
-                            ob.bonoindexado = Math.Round(ob.bono * (1 + ob.infperiodo), 2);
-                            ob.interes = -Math.Round(ob.bonoindexado * efp, 2);
-                            ob.amort = -(vnom / npa);
-                            ob.cuota = Math.Round(ob.interes + ob.amort, 2);
-                            if (i == npa) { ob.prima = -Math.Round(Double.Parse(calculadora.Prima) * vnom, 2); }
-                            else { ob.prima = 0; }
-                            ob.escudo = -Math.Round(ob.interes * 0.30, 2);
-                            if (i == npa) { ob.femisor = ob.cuota + ob.prima; } else { ob.femisor = ob.cuota; }                                
-                            ob.femiescu = Math.Round(ob.escudo + ob.femisor, 2);
-                            ob.fbonista = -ob.femisor;
-                            //es + porque la amort esta en negativo
-                            aux +=ob.amort;
-                                 
-                        }                   
-                    }
+                    ob.numero = i;
+                    ob.infanual = 0;
+                    ob.infperiodo = 0;
+                    if (i == 0) { ob.bono = 0; } else { ob.bono = Round(aux, 2); }
+                    ob.bonoindexado = Formulas.BonoIndexado(i, npa, ob.bono, ob.infperiodo);
+                    ob.interes = Formulas.CalcularInteres(i, npa, ob.bonoindexado, efp);
+                    ob.amort = Formulas.AmortizacionAleman(i, npa, vnom);
+                    ob.cuota = Formulas.CuotaAleman(i, npa, ob.interes, ob.amort);
+                    ob.prima = Formulas.Prima(i, npa, Double.Parse(calculadora.Prima), vnom);
+                    ob.escudo = Formulas.Escudo(i, npa, ob.interes);
+                    ob.femisor = Formulas.FEmisor(i, npa, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
+                    ob.femiescu = Formulas.FEmisorEscudo(i, npa, ob.escudo, ob.femisor);
+                    ob.fbonista = Formulas.FBonista(i, npa, Double.Parse(calculadora.Vcomercial), cib, ob.femisor); ;
+                    //es + porque la amort esta en negativo
+                    aux += ob.amort;
                     hi.Add(ob);
-                }             
-             //   ViewBag.listahi = hi;
+                }
             }
             else if (calculadora.MetodoPago.TipoMetodo == "Frances")
             {
@@ -169,49 +142,26 @@ namespace BonosCalculadora.Controllers
                 for (int i = 0; i <= npa; i++)
                 {
                     Objeto ob = new Objeto();
-                    if (i <= npa)
-                    {
-                        if (i == 0)
-                        {
-                            ob.numero = 0;
-                            ob.infanual = 0;
-                            ob.infperiodo = 0;
-                            ob.bono = 0;
-                            ob.bonoindexado = 0;
-                            ob.interes = 0;
-                            ob.cuota = 0;
-                            ob.amort = 0;
-                            ob.prima = 0;
-                            ob.escudo = 0;
-                            ob.femisor = flujoemi;
-                            ob.femiescu = flujoemi;
-                            ob.fbonista = flujobonista;
-                        }
-                        else
-                        {
-                            ob.numero = i;
-                            ob.infanual = 0;
-                            ob.infperiodo = 0;
-                            ob.bono = Round(aux,2);
-                            ob.bonoindexado = Round(ob.bono * (1 + ob.infperiodo), 2);
-                            ob.interes = -Round(ob.bonoindexado * efp, 2);
-                            ob.cuota = Round(Formulas.cuotaFrances(vnom, efp, npa),2); ;
-                            ob.amort = Round(ob.cuota-ob.interes, 2);
-                            if (i == npa) { ob.prima = -Math.Round(Double.Parse(calculadora.Prima) * vnom, 2); }
-                            else { ob.prima = 0; }
-                            ob.escudo = -Math.Round(ob.interes * 0.30, 2);
-                            if (i == npa) { ob.femisor = ob.cuota + ob.prima; } else { ob.femisor = ob.cuota; }
-                            ob.femiescu = Math.Round(ob.escudo + ob.femisor, 2);
-                            ob.fbonista = -ob.femisor;
-                            aux += ob.amort;
-                        }
-                    }
+
+                    ob.numero = i;
+                    ob.infanual = 0;
+                    ob.infperiodo = 0;
+                    if (i == 0) { ob.bono = 0; } else { ob.bono = Round(aux, 2); }
+                    ob.bonoindexado = Formulas.BonoIndexado(i, npa, ob.bono, ob.infperiodo);
+                    ob.interes = Formulas.CalcularInteres(i, npa, ob.bonoindexado, efp);
+                    ob.cuota = Formulas.cuotaFrances(vnom, efp, npa); ;
+                    ob.amort = Formulas.AmortizacionFrances(i, npa, ob.cuota, ob.interes);
+                    ob.prima = Formulas.Prima(i, npa, Double.Parse(calculadora.Prima), vnom);
+                    ob.escudo = Formulas.Escudo(i, npa, ob.interes);
+                    ob.femisor = Formulas.FEmisor(i, npa, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
+                    ob.femiescu = Formulas.FEmisorEscudo(i, npa, ob.escudo, ob.femisor);
+                    ob.fbonista = Formulas.FBonista(i, npa, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
+                    aux += ob.amort;
+
                     hi.Add(ob);
                 }
-               
             }
             ViewBag.listahi = hi;
-            //ViewBag.a = ola;
             return View(calculadora);
         }
 

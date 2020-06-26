@@ -12,22 +12,6 @@ namespace BonosCalculadora.Models
     {
         public int FormulasId { get; set; }
 
-        public static List<double> resultados()
-        {
-            List<double> objetos = new List<double>();
-            double ctp = CalcularTotalPeriodos(360, 180);
-            double ccib = CalcularCostesInicalesBonista(0.5, 0.5, 0.7);
-            objetos.Add(ctp);
-            objetos.Add(ccib);
-            return objetos;
-        }
-        //tatic public double el(double num)
-        //   {
-        //       double a;
-        //       a = Math.Pow(num, 2);
-        //       return a;
-        //   }
-
         static public int DevolverFrecuenciaPago(string frecuencia)
         {
             if (frecuencia == "Semestral") return 180;
@@ -96,7 +80,7 @@ namespace BonosCalculadora.Models
         static public double CalcularCokPeriodo(double cok, double frec, double dias)
         {
             double cokperiodo;
-            cokperiodo = Round(Pow(1 + cok, frec / dias) - 1, 5);
+            cokperiodo = Pow(1 + cok, frec / dias) - 1;
             return cokperiodo;
         }
         static public double CalcularCostesInicialesEmisor(double pEst, double pCol, double pFlo, double pCAVA, double VCom)
@@ -112,19 +96,11 @@ namespace BonosCalculadora.Models
             costes = Round((pFlo + pCAVA) * VCom, 2);
             return costes;
         }
-        //Hallando TIR para una serie de numeros
-        static public double calculartir( double[] array)
-        {
-            //   double[] ola = new double[] { -1059.975, 73.081238156655 };
-           // double[] ola = array;
 
-            double a =Financial.IRR(ref array,0.01);
-            return a;
-        }
 
         static public double cuotaFrances(double prestamo,double tep,int n)
         {
-            double r=Financial.Pmt(tep,n,prestamo);
+            double r=Round(Financial.Pmt(tep,n,prestamo),2);
             return r;
 
         }
@@ -187,6 +163,33 @@ namespace BonosCalculadora.Models
                 cuota = Round(-bono + interes,2);
             }
             
+            return cuota;
+        }
+
+        static public double AmortizacionAleman( int periodo, int totalperiodos, double vnom)
+        {
+            double amort = 0;
+            if (periodo == 0)
+            {
+                amort = 0;
+            }
+            else if (periodo <= totalperiodos)
+            {
+                amort = -Round(vnom/totalperiodos,2);
+            }
+            return amort;
+        }
+        static public double CuotaAleman(int periodo, int totalperiodos, double interes, double amort)
+        {
+            double cuota = 0;
+            if (periodo == 0)
+            {
+                cuota = 0;
+            }
+            else if (periodo <= totalperiodos)
+            {
+                cuota = Round(interes + amort, 2);
+            }
             return cuota;
         }
 
@@ -280,9 +283,44 @@ namespace BonosCalculadora.Models
             return amort;
 
         }
-      
 
+        static public double AmortizacionFrances(int periodo, int totalperiodos, double cuota,double interes)
+        {
+            double amort = 0;
+            if (periodo == 0)
+            {
+                amort = 0;
+            }
+            else if (periodo <= totalperiodos)
+            {
+                amort = Round(cuota-interes,2);
+            }
+            return amort;
 
+        }
+
+        //Hallando TIR para una serie de numeros
+        static public double calculartir(double[] array)
+        {
+
+            double a = Round(Financial.IRR(ref array, 0.01),4);
+            return a;
+        }
+        //Hallando VAN para una serie de numeros
+        static public double CalcularVAN(double tasa, double[] array)
+        {
+            double van = Round(Financial.NPV(tasa, ref array),2);
+            return van;
+        }
+
+        //para calcular no se necesita el primer valor del array
+        static public double[] ReduceTamaño(double[]array)
+        {
+            List<double> listaaux = array.ToList();
+            listaaux.RemoveAt(0);
+            double[] arregloaux = listaaux.ToArray();
+            return arregloaux;     
+        }
 
 
 
