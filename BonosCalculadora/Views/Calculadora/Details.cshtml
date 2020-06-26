@@ -5,139 +5,150 @@
 }
 
 <h1>Resultado de la estructuración del Bono</h1>
+<div class="container">
+    <div class="row">   
+        <div class="col-sm border border-primary">
+            One of three columns
+        </div>
+        <div class="col-sm border border-primary text-center">
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Frecuencia del Cupon: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.Frec</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Dias de Capitalizacion: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.Capi</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Periodos Por Año: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.Peri</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Periodos Totales: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.PeriT</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Tasa Efectiva Anual: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.Tasa</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Tasa Efectiva Del Periodo: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.TasaP</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Cok Del Periodo: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.CokP</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Costes Iniciales Emisor: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.Cie</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Costes Iniciales Bonista: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.Cib</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">Tir: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.t</label>
+                </div>
+            </div>
+            @*<div class="form-group row">
+                <label class="col-sm-6 col-form-label text-right">cuota: </label>
+                <div class="col-sm-6 text-left">
+                    <label type="text" readonly class="form-control-plaintext"> @ViewBag.c</label>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>
 
-<form>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Frecuencia del Cupon: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Frec</label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Dias de Capitalizacion: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Capi</label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Periodos Por Año: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Peri</label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Periodos Totales: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.PeriT</label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Tasa Efectiva Anual: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Tasa</label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Tasa Efectiva Del Periodo: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.TasaP</label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Cok Del Periodo: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.CokP</label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Costes Iniciales Emisor: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Cie</label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Costes Iniciales Bonista: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.Cib</label>
-        </div>
-    </div>
-    @*<div class="form-group row">
-        <label class="col-sm-2 col-form-label">Costes Iniciales Bonista: </label>
-        <div class="col-sm-10">
-            <label type="text" readonly class="form-control-plaintext"> @ViewBag.a</label>
-        </div>
-    </div>*@
+    <table class="table table-responsive table-bordered table-sm ">
+        <thead>
+            <tr class="table-warning">
+                <th>N°</th>
+                <th>Inflacion Anual</th>
+                <th>Inflacion Periodo</th>
+                <th>Bono</th>
+                <th>Bono Indexado</th>
+                <th>Cupon (Interes)</th>
+                <th>Cuota</th>
+                <th>Amortizacion</th>
+                <th>Prima</th>
+                <th>Escudo</th>
+                <th>Flujo Emisor</th>
+                <th>Flujo Emisor c/Escudo</th>
+                <th>Flujo Bonista</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.listahi)
+            {
+                <tr>
+                    <td>@item.numero</td>
+                    <td>@item.infanual</td>
+                    <td>@item.infperiodo</td>
+                    <td>@item.bono</td>
+                    <td>@item.bonoindexado</td>
+                    <td>@item.interes</td>
+                    <td>@item.cuota</td>
+                    <td>@item.amort</td>
+                    <td>@item.prima</td>
+                    <td>@item.escudo</td>
+                    <td>@item.femisor</td>
+                    <td>@item.femiescu</td>
+                    <td>@item.fbonista</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*<div>
+           <h4>Calculadora</h4>
+           <hr />
+           <div class="row">
+               <div class="col-md-4">
+                   <dt class="col-sm-2">
+                       Frecuencia del Cupon
+                   </dt>
+                   <dd class="col-sm-2">
+                       @ViewBag.Frec
+                   </dd>
+                   <dt class="col-sm-2">
+                       Dias de Capitalizacion
+                   </dt>
+                   <dd class="col-sm-2">
+                       @ViewBag.Capi
+                   </dd>
+                   <dt class="col-sm-2">
+                       Numero de Periodos Por Año
+                   </dt>
+                   <dd class="col-sm-2">
+                       @ViewBag.Peri
+                   </dd>
 
-</form>
-
-<table class="table table-responsive table-bordered table-sm ">
-    <thead>
-        <tr class="table-warning">
-            <th>N°</th>
-            <th>Inflacion Anual</th>
-            <th>Inflacion Periodo</th>
-            <th>Bono</th>
-            <th>Bono Indexado</th>
-            <th>Cupon (Interes)</th>
-            <th>Cuota</th>
-            <th>Amortizacion</th>
-            <th>Prima</th>
-            <th>Escudo</th>
-            <th>Flujo Emisor</th>
-            <th>Flujo Emisor c/Escudo</th>
-            <th>Flujo Bonista</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in ViewBag.listahi)
-        {
-        <tr>    
-            <td>@item.numero</td>
-            <td>@item.infanual</td>
-            <td>@item.infperiodo</td>
-            <td>@item.bono</td>
-            <td>@item.bonoindexado</td>
-            <td>@item.interes</td>
-            <td>@item.cuota</td>
-            <td>@item.amort</td>
-            <td>@item.prima</td>
-            <td>@item.escudo</td>
-            <td>@item.femisor</td>
-            <td>@item.femiescu</td>
-            <td>@item.fbonista</td>
-        </tr>
-        }
-    </tbody>
-</table>
-@*<div>
-    <h4>Calculadora</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <dt class="col-sm-2">
-                Frecuencia del Cupon
-            </dt>
-            <dd class="col-sm-2">
-                @ViewBag.Frec
-            </dd>
-            <dt class="col-sm-2">
-                Dias de Capitalizacion
-            </dt>
-            <dd class="col-sm-2">
-                @ViewBag.Capi
-            </dd>
-            <dt class="col-sm-2">
-                Numero de Periodos Por Año
-            </dt>
-            <dd class="col-sm-2">
-                @ViewBag.Peri
-            </dd>
-
-            </dl>
-        </div>
-    </div>
- </div>*@
-@*<div>
-    <a asp-action="Edit" asp-route-id="@Model.CalculadoraId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>*@
+                   </dl>
+               </div>
+           </div>
+        </div>*@
+    @*<div>
+            <a asp-action="Edit" asp-route-id="@Model.CalculadoraId">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>*@

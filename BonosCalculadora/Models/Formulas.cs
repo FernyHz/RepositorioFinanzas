@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
+using Microsoft.VisualBasic;
+using static System.Math;
 
 namespace BonosCalculadora.Models
 {
@@ -65,7 +67,6 @@ namespace BonosCalculadora.Models
             return periodos;
         }
 
-
         static public double CalcularTasaEfectivaAnual(string tasa, double valortasa, int diasAño, int diasCapi)
         {
             double nuevatasa;
@@ -77,7 +78,7 @@ namespace BonosCalculadora.Models
             }
             else if (tasa == "Nominal")
             {
-                nuevatasa = Math.Round(Math.Pow(1 + valortasa / (diasAño / diasCapi), diasAño / diasCapi) - 1, 5);
+                nuevatasa = Round(Pow(1 + valortasa / (diasAño / diasCapi), diasAño / diasCapi) - 1, 5);
                 return nuevatasa;
             }
             else
@@ -89,35 +90,203 @@ namespace BonosCalculadora.Models
         static public double CalcularTasaEfectivaDelPeriodo(double valortasa, double frec, double diasAño)
         {
             double tasa;
-            tasa = Math.Round(Math.Pow(1 + valortasa, (frec / diasAño)) - 1, 5);
+            tasa = Round(Pow(1 + valortasa, (frec / diasAño)) - 1, 5);
             return tasa;
         }
         static public double CalcularCokPeriodo(double cok, double frec, double dias)
         {
             double cokperiodo;
-            cokperiodo = Math.Round(Math.Pow(1 + cok, frec / dias) - 1, 5);
+            cokperiodo = Round(Pow(1 + cok, frec / dias) - 1, 5);
             return cokperiodo;
         }
         static public double CalcularCostesInicialesEmisor(double pEst, double pCol, double pFlo, double pCAVA, double VCom)
         {
             double costes;
-            costes = Math.Round((pEst + pCol + pCAVA + pFlo) * VCom, 2);
+            costes = Round((pEst + pCol + pCAVA + pFlo) * VCom, 2);
             return costes;
         }
 
         static public double CalcularCostesInicalesBonista(double pFlo, double pCAVA, double VCom)
         {
             double costes;
-            costes = Math.Round((pFlo + pCAVA) * VCom, 2);
+            costes = Round((pFlo + pCAVA) * VCom, 2);
             return costes;
         }
+        //Hallando TIR para una serie de numeros
+        static public double calculartir( double[] array)
+        {
+            //   double[] ola = new double[] { -1059.975, 73.081238156655 };
+           // double[] ola = array;
 
-        static public List<Objeto> americano(Objeto ayuda) {
-
-         //   ayuda.numperiodo = 0 ;
-            
-            return null; 
+            double a =Financial.IRR(ref array,0.01);
+            return a;
         }
+
+        static public double cuotaFrances(double prestamo,double tep,int n)
+        {
+            double r=Financial.Pmt(tep,n,prestamo);
+            return r;
+
+        }
+
+        static public double Bono(int periodo, int totalperiodos,double vnom)
+        {
+            double bono = 0;
+            if (periodo == 0)
+            {
+                bono= 0;
+            }else if(periodo<= totalperiodos)
+            {
+                bono = vnom;
+            }
+            return bono;
+        }
+        //Todos
+        static public double BonoIndexado(int periodo, int totalperiodos, double bono, double infperiodo)
+        {
+            double bonoindex = 0;
+            if (periodo == 0)
+            {
+                bonoindex = 0;
+            }
+            else if (periodo <= totalperiodos)
+            {
+                bonoindex = Round(bono * (1 + infperiodo), 2);
+            }
+            return bonoindex;
+        }
+
+        //Todos
+        static public double CalcularInteres(int periodo, int totalperiodos, double bonoindexado,double tep)
+        {
+            double interes = 0;
+            if (periodo == 0)
+            {
+                interes =0;
+            }
+            else if (periodo <= totalperiodos)
+            {
+               interes = -Round(bonoindexado * tep, 2);
+            }
+            return interes;
+        }
+
+        static public double CuotaAmericano(double bono,int periodo,int totalperiodos,double interes,double amort)
+        {
+            double cuota = 0;
+            if (periodo == 0) 
+            {
+                cuota = 0;
+            }
+            else if (periodo < totalperiodos)
+            {
+               cuota = Round(interes + amort,2);
+            }
+            else if (periodo == totalperiodos)
+            {
+                cuota = Round(-bono + interes,2);
+            }
+            
+            return cuota;
+        }
+
+        static public double Escudo(int periodo, int totalperiodos,double interes)
+        {
+            double escudo=0;
+            if (periodo == 0)
+            {
+                escudo= 0;
+            }
+            else if (periodo <= totalperiodos)
+            {
+                escudo = -Round(interes * 0.30, 2);
+            }
+            
+            return escudo;
+        }
+        static public double FEmisor(int periodo, int totalperiodos, double cuota, double prima, double vcomercial, double costoinicial)
+        {
+            double femi = 0;
+            if (periodo == 0)
+            {
+                femi = Round(vcomercial - costoinicial, 2);
+            }
+            else if (periodo < totalperiodos)
+            {
+                femi = cuota;
+            }
+            else if (periodo == totalperiodos)
+            {
+                femi = cuota + prima;
+            }
+            return femi;
+        }
+        static public double FEmisorEscudo(int periodo, int totalperiodos,double escudo,double femisor)
+        {
+            double femiescu = 0;
+            if (periodo == 0)
+            {
+                femiescu = femisor;
+            }
+            else if (periodo <= totalperiodos)
+            {
+                femiescu = Round(escudo + femisor, 2);
+            }
+           
+            return femiescu;
+
+        }
+
+        static public double FBonista(int periodo, int totalperiodos,double vcomercial, double costoinicial,double femisor)
+        {
+            double fbonista = 0;
+            if (periodo == 0)
+            {
+                fbonista = -vcomercial - costoinicial;
+            }
+            else if (periodo <= totalperiodos)
+            {
+                fbonista = -femisor;
+            }
+
+            return fbonista;
+        }
+        static public double Prima(int periodo, int totalperiodos, double prima,double bonoindexado)
+        {
+            double primaaux = 0;
+            if (periodo < totalperiodos)
+            {
+                primaaux = 0;
+            }
+            else if(periodo == totalperiodos)
+            {
+                primaaux = -Round(prima * bonoindexado, 2);
+            }
+            return primaaux;
+                   
+        }
+
+        static public double AmortizacionAmericano(int periodo, int totalperiodos,double bono)
+        {
+            double amort = 0;
+            if (periodo < totalperiodos)
+            {
+                amort = 0;
+            }
+            else if(periodo == totalperiodos)
+            {
+                amort = -bono;
+            }
+            return amort;
+
+        }
+      
+
+
+
+
+
+
 
     }
 }
