@@ -27,7 +27,7 @@ namespace BonosCalculadora.Models
         static public int DevolverDiasCapitalizacion(string frecuencia)
         {
             if (frecuencia == "Diaria") return 1;
-            if (frecuencia == "Quincenal") return 180;
+            if (frecuencia == "Quincenal") return 15;
             if (frecuencia == "Semestral") return 180;
             if (frecuencia == "Mensual") return 30;
             if (frecuencia == "Bimestral") return 60;
@@ -38,12 +38,14 @@ namespace BonosCalculadora.Models
 
         }
 
+        //npa=numero de periodos por año
         static public int CalcularTotalPeriodos(int naños, int npa)
         {
             int periodos;
             periodos = naños * npa;
             return periodos;
         }
+
         static public int CalcularPeriodosporAño(int dias, int frecuencia)
         {
             int periodos;
@@ -56,8 +58,8 @@ namespace BonosCalculadora.Models
             double nuevatasa;
             if (tasa == "Efectiva")
             {
-
-                nuevatasa = Math.Round(valortasa, 5);
+                   //Round redonde a 5 decimales
+                nuevatasa = Round(valortasa, 5);
                 return nuevatasa;
             }
             else if (tasa == "Nominal")
@@ -71,25 +73,30 @@ namespace BonosCalculadora.Models
             }
         }
 
+        //la tasa efectiva anual se transforma a tasas por periodos
         static public double CalcularTasaEfectivaDelPeriodo(double valortasa, double frec, double diasAño)
         {
             double tasa;
             tasa = Round(Pow(1 + valortasa, (frec / diasAño)) - 1, 5);
             return tasa;
         }
+
+        //cok anual dividido en varios periodos
         static public double CalcularCokPeriodo(double cok, double frec, double dias)
         {
             double cokperiodo;
             cokperiodo = Pow(1 + cok, frec / dias) - 1;
             return cokperiodo;
         }
+
+        //costes iniciales alterados al valor comercial
         static public double CalcularCostesInicialesEmisor(double pEst, double pCol, double pFlo, double pCAVA, double VCom)
         {
             double costes;
             costes = Round((pEst + pCol + pCAVA + pFlo) * VCom, 2);
             return costes;
         }
-
+        //costes iniciales alterados al valor comercial
         static public double CalcularCostesInicalesBonista(double pFlo, double pCAVA, double VCom)
         {
             double costes;
@@ -200,6 +207,7 @@ namespace BonosCalculadora.Models
             {
                 escudo= 0;
             }
+            //0.30 significa el impuesto a la renta
             else if (periodo <= totalperiodos)
             {
                 escudo = -Round(interes * 0.30, 2);
@@ -303,7 +311,7 @@ namespace BonosCalculadora.Models
         static public double calculartir(double[] array)
         {
 
-            double a = Round(Financial.IRR(ref array, 0.01),4);
+            double a = Round(Financial.IRR(ref array,0.01),4);
             return a;
         }
         //Hallando VAN para una serie de numeros

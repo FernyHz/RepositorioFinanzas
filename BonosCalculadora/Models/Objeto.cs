@@ -23,19 +23,5 @@ namespace BonosCalculadora.Models
         public double fbonista { get; set; }
 
 
-        //  <th>N°</th>
-        //     <th>Inflacion Anual</th>
-        //     <th>Inflacion Periodo</th>
-        //     <th>Bono</th>
-        //     <th>Bono Indexado</th>
-        //     <th>Cupon (Interes)</th>
-        //     <th>Cuota</th>
-        //     <th>Amortizacion</th>
-        //     <th>Prima</th>
-        //     <th>Escudo</th>
-        //     <th>Flujo Emisor</th>
-        //     <th>Flujo Emisor c/Escudo</th>
-        //     <th>Flujo Bonista</th>
-        //
     }
 }

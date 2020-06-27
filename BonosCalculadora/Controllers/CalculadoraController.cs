@@ -58,7 +58,7 @@ namespace BonosCalculadora.Controllers
             int frec = Formulas.DevolverFrecuenciaPago(calculadora.FrecuenciaPago.Tipofrecuencia);
             int dc = Formulas.DevolverDiasCapitalizacion(calculadora.Capitalizacion.TipoCapitalizacion);
             int ctp = Formulas.CalcularPeriodosporAño(calculadora.DiasAño, frec);
-            int npa = Formulas.CalcularTotalPeriodos(calculadora.NAños, ctp);
+            int tp = Formulas.CalcularTotalPeriodos(calculadora.NAños, ctp);
             double efa = Formulas.CalcularTasaEfectivaAnual(calculadora.TasaInteres.TipoTasa, Double.Parse(calculadora.TasaDeInteres), calculadora.DiasAño, dc);
             double efp = Formulas.CalcularTasaEfectivaDelPeriodo(efa, frec, calculadora.DiasAño);
             double ck = Formulas.CalcularCokPeriodo(Double.Parse(calculadora.Cok), frec, calculadora.DiasAño);
@@ -68,7 +68,7 @@ namespace BonosCalculadora.Controllers
             ViewBag.Capi = dc;
             ViewBag.Peri = ctp;
             ViewBag.Frec = frec;
-            ViewBag.PeriT = npa;
+            ViewBag.PeriT = tp;
             ViewBag.Tasa = efa;
             ViewBag.TasaP = efp;
             ViewBag.CokP = Round(ck,5);
@@ -80,31 +80,32 @@ namespace BonosCalculadora.Controllers
             if (calculadora.MetodoPago.TipoMetodo == "Americano")
             {
                 aux = 0;
-                double[] arraytir = new double[npa + 1];
-                double[] arrayvan = new double[npa + 1];
+                double[] arraytir = new double[tp + 1];
+                double[] arrayvan = new double[tp + 1];
 
-                for (int i = 0; i <= npa; i++)
+                for (int i = 0; i <= tp; i++)
                 {
                     Objeto ob = new Objeto();
                     ob.numero = i;
                     ob.infanual = 0;
                     ob.infperiodo = 0;
-                    ob.bono = Formulas.Bono(i, npa, Double.Parse(calculadora.Vnominal));
-                    ob.bonoindexado = Formulas.BonoIndexado(i, npa, ob.bono, ob.infperiodo);
-                    ob.interes = Formulas.CalcularInteres(i, npa, ob.bonoindexado, efp);
-                    ob.cuota = Formulas.CuotaAmericano(ob.bono, i, npa, ob.interes, ob.amort);
-                    ob.amort = Formulas.AmortizacionAmericano(i, npa, ob.bono);
-                    ob.prima = Formulas.Prima(i, npa, Double.Parse(calculadora.Prima), vnom);
-                    ob.escudo = Formulas.Escudo(i, npa, ob.interes);
-                    ob.femisor = Formulas.FEmisor(i, npa, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
-                    ob.femiescu = Formulas.FEmisorEscudo(i, npa, ob.escudo, ob.femisor);
-                    ob.fbonista = Formulas.FBonista(i, npa, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
+                    ob.bono = Formulas.Bono(i, tp, Double.Parse(calculadora.Vnominal));
+                    ob.bonoindexado = Formulas.BonoIndexado(i, tp, ob.bono, ob.infperiodo);
+                    ob.interes = Formulas.CalcularInteres(i, tp, ob.bonoindexado, efp);
+                    ob.cuota = Formulas.CuotaAmericano(ob.bono, i, tp, ob.interes, ob.amort);
+                    ob.amort = Formulas.AmortizacionAmericano(i, tp, ob.bono);
+                    ob.prima = Formulas.Prima(i, tp, Double.Parse(calculadora.Prima), vnom);
+                    ob.escudo = Formulas.Escudo(i, tp, ob.interes);
+                    ob.femisor = Formulas.FEmisor(i, tp, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
+                    ob.femiescu = Formulas.FEmisorEscudo(i, tp, ob.escudo, ob.femisor);
+                    ob.fbonista = Formulas.FBonista(i, tp, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
                     arraytir[i] = ob.fbonista;
                     arrayvan[i] = ob.fbonista; 
 
                     hi.Add(ob);
                 }
                 double tir = Formulas.calculartir(arraytir);
+                
                 double[] arrayvanreducido = Formulas.ReduceTamaño(arrayvan);
                 double van = Formulas.CalcularVAN(ck,arrayvanreducido);
               
@@ -115,22 +116,22 @@ namespace BonosCalculadora.Controllers
             {
                 //para calcular la bajada del saldo inicial del bono
                 aux = vnom;
-                for (int i = 0; i <= npa; i++)
+                for (int i = 0; i <= tp; i++)
                 {
                     Objeto ob = new Objeto();
                     ob.numero = i;
                     ob.infanual = 0;
                     ob.infperiodo = 0;
                     if (i == 0) { ob.bono = 0; } else { ob.bono = Round(aux, 2); }
-                    ob.bonoindexado = Formulas.BonoIndexado(i, npa, ob.bono, ob.infperiodo);
-                    ob.interes = Formulas.CalcularInteres(i, npa, ob.bonoindexado, efp);
-                    ob.amort = Formulas.AmortizacionAleman(i, npa, vnom);
-                    ob.cuota = Formulas.CuotaAleman(i, npa, ob.interes, ob.amort);
-                    ob.prima = Formulas.Prima(i, npa, Double.Parse(calculadora.Prima), vnom);
-                    ob.escudo = Formulas.Escudo(i, npa, ob.interes);
-                    ob.femisor = Formulas.FEmisor(i, npa, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
-                    ob.femiescu = Formulas.FEmisorEscudo(i, npa, ob.escudo, ob.femisor);
-                    ob.fbonista = Formulas.FBonista(i, npa, Double.Parse(calculadora.Vcomercial), cib, ob.femisor); ;
+                    ob.bonoindexado = Formulas.BonoIndexado(i, tp, ob.bono, ob.infperiodo);
+                    ob.interes = Formulas.CalcularInteres(i, tp, ob.bonoindexado, efp);
+                    ob.amort = Formulas.AmortizacionAleman(i, tp, vnom);
+                    ob.cuota = Formulas.CuotaAleman(i, tp, ob.interes, ob.amort);
+                    ob.prima = Formulas.Prima(i, tp, Double.Parse(calculadora.Prima), vnom);
+                    ob.escudo = Formulas.Escudo(i, tp, ob.interes);
+                    ob.femisor = Formulas.FEmisor(i, tp, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
+                    ob.femiescu = Formulas.FEmisorEscudo(i, tp, ob.escudo, ob.femisor);
+                    ob.fbonista = Formulas.FBonista(i, tp, Double.Parse(calculadora.Vcomercial), cib, ob.femisor); ;
                     //es + porque la amort esta en negativo
                     aux += ob.amort;
                     hi.Add(ob);
@@ -139,7 +140,7 @@ namespace BonosCalculadora.Controllers
             else if (calculadora.MetodoPago.TipoMetodo == "Frances")
             {
                 aux = vnom;
-                for (int i = 0; i <= npa; i++)
+                for (int i = 0; i <= tp; i++)
                 {
                     Objeto ob = new Objeto();
 
@@ -147,15 +148,15 @@ namespace BonosCalculadora.Controllers
                     ob.infanual = 0;
                     ob.infperiodo = 0;
                     if (i == 0) { ob.bono = 0; } else { ob.bono = Round(aux, 2); }
-                    ob.bonoindexado = Formulas.BonoIndexado(i, npa, ob.bono, ob.infperiodo);
-                    ob.interes = Formulas.CalcularInteres(i, npa, ob.bonoindexado, efp);
-                    ob.cuota = Formulas.cuotaFrances(vnom, efp, npa); ;
-                    ob.amort = Formulas.AmortizacionFrances(i, npa, ob.cuota, ob.interes);
-                    ob.prima = Formulas.Prima(i, npa, Double.Parse(calculadora.Prima), vnom);
-                    ob.escudo = Formulas.Escudo(i, npa, ob.interes);
-                    ob.femisor = Formulas.FEmisor(i, npa, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
-                    ob.femiescu = Formulas.FEmisorEscudo(i, npa, ob.escudo, ob.femisor);
-                    ob.fbonista = Formulas.FBonista(i, npa, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
+                    ob.bonoindexado = Formulas.BonoIndexado(i, tp, ob.bono, ob.infperiodo);
+                    ob.interes = Formulas.CalcularInteres(i, tp, ob.bonoindexado, efp);
+                    ob.cuota = Formulas.cuotaFrances(vnom, efp, tp); ;
+                    ob.amort = Formulas.AmortizacionFrances(i, tp, ob.cuota, ob.interes);
+                    ob.prima = Formulas.Prima(i, tp, Double.Parse(calculadora.Prima), vnom);
+                    ob.escudo = Formulas.Escudo(i, tp, ob.interes);
+                    ob.femisor = Formulas.FEmisor(i, tp, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
+                    ob.femiescu = Formulas.FEmisorEscudo(i, tp, ob.escudo, ob.femisor);
+                    ob.fbonista = Formulas.FBonista(i, tp, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
                     aux += ob.amort;
 
                     hi.Add(ob);

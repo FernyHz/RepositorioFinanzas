@@ -31,17 +31,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="TasaInteres" asp-action="Index">TasaInteres</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Frecuenciapago" asp-action="Index">FrecuenciaPago</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Capitalizacion" asp-action="Index">Capitalizacion</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Calculadora" asp-action="Index">Calculadora</a>
-                        </li>
 
-                    </ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Calculadora" asp-action="Index">Calculadora</a>
+                            </li>
+                        }
+                        </ul>
                 </div>
             </div>
         </nav>
