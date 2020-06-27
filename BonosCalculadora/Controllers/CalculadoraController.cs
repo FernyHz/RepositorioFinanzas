@@ -18,7 +18,8 @@ namespace BonosCalculadora.Controllers
         private readonly DbBonosContext _context;
         public double aux { get; set; }
         public double aux2 { get; set; }
-        //para aplicarlo en el aleman
+        //para aplicarlo en el aleman hola hola
+        //Hola com estas
         public double bonoconstante { get; set; }
         
         

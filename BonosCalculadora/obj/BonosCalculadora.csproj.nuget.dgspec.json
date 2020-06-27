@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Finanzas\\Bonos\\BonosCalculadora\\BonosCalculadora\\BonosCalculadora.csproj": {}
+    "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\BonosCalculadora.csproj": {}
   },
   "projects": {
-    "E:\\Finanzas\\Bonos\\BonosCalculadora\\BonosCalculadora\\BonosCalculadora.csproj": {
+    "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\BonosCalculadora.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Finanzas\\Bonos\\BonosCalculadora\\BonosCalculadora\\BonosCalculadora.csproj",
+        "projectUniqueName": "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\BonosCalculadora.csproj",
         "projectName": "BonosCalculadora",
-        "projectPath": "E:\\Finanzas\\Bonos\\BonosCalculadora\\BonosCalculadora\\BonosCalculadora.csproj",
-        "packagesPath": "C:\\Users\\Fernando\\.nuget\\packages\\",
-        "outputPath": "E:\\Finanzas\\Bonos\\BonosCalculadora\\BonosCalculadora\\obj\\",
+        "projectPath": "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\BonosCalculadora.csproj",
+        "packagesPath": "C:\\Users\\hilla\\.nuget\\packages\\",
+        "outputPath": "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Fernando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hilla\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
