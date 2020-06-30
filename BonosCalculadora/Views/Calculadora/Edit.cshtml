@@ -4,104 +4,130 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Calculadora</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CalculadoraId" />
-            <div class="form-group">
-                <label asp-for="FrecuenciaPagoId" class="control-label"></label>
-                <select asp-for="FrecuenciaPagoId" class="form-control" asp-items="ViewBag.FrecuenciaPagoId"></select>
-                <span asp-validation-for="FrecuenciaPagoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TasaInteresId" class="control-label"></label>
-                <select asp-for="TasaInteresId" class="form-control" asp-items="ViewBag.TasaInteresId"></select>
-                <span asp-validation-for="TasaInteresId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CapitalizacionId" class="control-label"></label>
-                <select asp-for="CapitalizacionId" class="form-control" asp-items="ViewBag.CapitalizacionId"></select>
-                <span asp-validation-for="CapitalizacionId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MetodoPagoId" class="control-label"></label>
-                <select asp-for="MetodoPagoId" class="form-control" asp-items="ViewBag.MetodoPagoId"></select>
-                <span asp-validation-for="MetodoPagoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Vnominal" class="control-label"></label>
-                <input asp-for="Vnominal" class="form-control" />
-                <span asp-validation-for="Vnominal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Vcomercial" class="control-label"></label>
-                <input asp-for="Vcomercial" class="form-control" />
-                <span asp-validation-for="Vcomercial" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TasaDeInteres" class="control-label"></label>
-                <input asp-for="TasaDeInteres" class="form-control" />
-                <span asp-validation-for="TasaDeInteres" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NAños" class="control-label"></label>
-                <input asp-for="NAños" class="form-control" />
-                <span asp-validation-for="NAños" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiasAño" class="control-label"></label>
-                <input asp-for="DiasAño" class="form-control" />
-                <span asp-validation-for="DiasAño" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cok" class="control-label"></label>
-                <input asp-for="Cok" class="form-control" />
-                <span asp-validation-for="Cok" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaEmision" class="control-label"></label>
-                <input asp-for="FechaEmision" class="form-control" />
-                <span asp-validation-for="FechaEmision" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prima" class="control-label"></label>
-                <input asp-for="Prima" class="form-control" />
-                <span asp-validation-for="Prima" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estructuración" class="control-label"></label>
-                <input asp-for="Estructuración" class="form-control" />
-                <span asp-validation-for="Estructuración" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Colocación" class="control-label"></label>
-                <input asp-for="Colocación" class="form-control" />
-                <span asp-validation-for="Colocación" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Flotacion" class="control-label"></label>
-                <input asp-for="Flotacion" class="form-control" />
-                <span asp-validation-for="Flotacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cavali" class="control-label"></label>
-                <input asp-for="Cavali" class="form-control" />
-                <span asp-validation-for="Cavali" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<header>
+    <div class="position-relative overflow-hidden text-center bg-l
+        ight" style="background-image: url(https://cypherbits.net/wp-content/uploads/2019/08/videoblocks-stock-market-financial-statistics-on-screen-share-pricing-online-trading-data-electronic-chart-with-stock-market-fluctuations_byprwtkrx_thumbnail-full12.png) ">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-3 font-weight-normal" style="color: white">Ingresar Datos.</h1>
+        </div>
     </div>
-</div>
+</header>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container m-2">
+    <form asp-action="Edit">
+        <section id="blog" class="py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-columns">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="CalculadoraId" />
+                            <div class="card bg-dark text-white">
+                                <blockquote class="card-blockquote card-body">
+                                    <div class="form-group">
+                                        <label asp-for="FrecuenciaPagoId" class="control-label"></label>
+                                        <select asp-for="FrecuenciaPagoId" class="form-control" asp-items="ViewBag.FrecuenciaPagoId"></select>
+                                        <span asp-validation-for="FrecuenciaPagoId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="TasaInteresId" class="control-label"></label>
+                                        <select asp-for="TasaInteresId" class="form-control" asp-items="ViewBag.TasaInteresId"></select>
+                                        <span asp-validation-for="TasaInteresId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="CapitalizacionId" class="control-label"></label>
+                                        <select asp-for="CapitalizacionId" class="form-control" asp-items="ViewBag.CapitalizacionId"></select>
+                                        <span asp-validation-for="CapitalizacionId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="MetodoPagoId" class="control-label"></label>
+                                        <select asp-for="MetodoPagoId" class="form-control" asp-items="ViewBag.MetodoPagoId"></select>
+                                        <span asp-validation-for="MetodoPagoId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Vnominal" class="control-label"></label>
+                                        <input asp-for="Vnominal" class="form-control" />
+                                        <span asp-validation-for="Vnominal" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Vcomercial" class="control-label"></label>
+                                        <input asp-for="Vcomercial" class="form-control" />
+                                        <span asp-validation-for="Vcomercial" class="text-danger"></span>
+                                    </div>
+                                </blockquote>
+                            </div>
+
+                            <div class="card bg-dark text-white">
+                                <blockquote class="card-blockquote card-body">
+                                    <div class="form-group">
+                                        <label asp-for="TasaDeInteres" class="control-label"></label>
+                                        <input asp-for="TasaDeInteres" class="form-control" />
+                                        <span asp-validation-for="TasaDeInteres" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="NAños" class="control-label"></label>
+                                        <input asp-for="NAños" class="form-control" />
+                                        <span asp-validation-for="NAños" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="DiasAño" class="control-label"></label>
+                                        <input asp-for="DiasAño" class="form-control" />
+                                        <span asp-validation-for="DiasAño" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Cok" class="control-label"></label>
+                                        <input asp-for="Cok" class="form-control" />
+                                        <span asp-validation-for="Cok" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="FechaEmision" class="control-label"></label>
+                                        <input asp-for="FechaEmision" class="form-control" />
+                                        <span asp-validation-for="FechaEmision" class="text-danger"></span>
+                                    </div>
+                                </blockquote>
+                            </div>
+
+                            <div class="card bg-dark text-white">
+                                <blockquote class="card-blockquote card-body">
+                                    <div class="form-group">
+                                        <label asp-for="Prima" class="control-label"></label>
+                                        <input asp-for="Prima" class="form-control" />
+                                        <span asp-validation-for="Prima" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Estructuración" class="control-label"></label>
+                                        <input asp-for="Estructuración" class="form-control" />
+                                        <span asp-validation-for="Estructuración" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Colocación" class="control-label"></label>
+                                        <input asp-for="Colocación" class="form-control" />
+                                        <span asp-validation-for="Colocación" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Flotacion" class="control-label"></label>
+                                        <input asp-for="Flotacion" class="form-control" />
+                                        <span asp-validation-for="Flotacion" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Cavali" class="control-label"></label>
+                                        <input asp-for="Cavali" class="form-control" />
+                                        <span asp-validation-for="Cavali" class="text-danger"></span>
+                                    </div>
+
+                                </blockquote>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <input type="submit" value="Save" class="btn btn-primary btn-block" />
+    </form>
+    <div>
+        <a asp-action="Index">Regresar</a>
+    </div>
 </div>
 
 @section Scripts {
