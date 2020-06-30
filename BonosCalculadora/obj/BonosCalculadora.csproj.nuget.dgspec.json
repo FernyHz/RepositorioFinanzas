@@ -1,21 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\BonosCalculadora.csproj": {}
+    "D:\\Escritorio\\repos\\RepositorioFinanzas\\BonosCalculadora\\BonosCalculadora.csproj": {}
   },
   "projects": {
-    "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\BonosCalculadora.csproj": {
+    "D:\\Escritorio\\repos\\RepositorioFinanzas\\BonosCalculadora\\BonosCalculadora.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\BonosCalculadora.csproj",
+        "projectUniqueName": "D:\\Escritorio\\repos\\RepositorioFinanzas\\BonosCalculadora\\BonosCalculadora.csproj",
         "projectName": "BonosCalculadora",
-        "projectPath": "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\BonosCalculadora.csproj",
-        "packagesPath": "C:\\Users\\hilla\\.nuget\\packages\\",
-        "outputPath": "D:\\UPC\\Finanzas\\finanzas6\\BonosCalculadora\\obj\\",
+        "projectPath": "D:\\Escritorio\\repos\\RepositorioFinanzas\\BonosCalculadora\\BonosCalculadora.csproj",
+        "packagesPath": "C:\\Users\\misat\\.nuget\\packages\\",
+        "outputPath": "D:\\Escritorio\\repos\\RepositorioFinanzas\\BonosCalculadora\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hilla\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\misat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -85,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
