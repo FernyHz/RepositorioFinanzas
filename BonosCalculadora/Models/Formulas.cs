@@ -105,12 +105,24 @@ namespace BonosCalculadora.Models
         }
 
 
-        static public double cuotaFrances(double prestamo,double tep,int n)
+        static public double cuotaFrances(int periodo, int totalperiodos, double prestamo, double tep, int n)
         {
-            double r=Round(Financial.Pmt(tep,n,prestamo),2);
+            double r = 0;
+            if (periodo == 0)
+            {
+                r = 0;
+            }
+            else if (periodo <= totalperiodos)
+            {
+                r = Round(Financial.Pmt(tep, n, prestamo), 2);
+            }
+
             return r;
 
         }
+
+
+
 
         static public double Bono(int periodo, int totalperiodos,double vnom)
         {

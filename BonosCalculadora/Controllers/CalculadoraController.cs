@@ -150,7 +150,7 @@ namespace BonosCalculadora.Controllers
                     if (i == 0) { ob.bono = 0; } else { ob.bono = Round(aux, 2); }
                     ob.bonoindexado = Formulas.BonoIndexado(i, tp, ob.bono, ob.infperiodo);
                     ob.interes = Formulas.CalcularInteres(i, tp, ob.bonoindexado, efp);
-                    ob.cuota = Formulas.cuotaFrances(vnom, efp, tp); ;
+                    ob.cuota = Formulas.cuotaFrances(i,tp,vnom, efp, tp); ;
                     ob.amort = Formulas.AmortizacionFrances(i, tp, ob.cuota, ob.interes);
                     ob.prima = Formulas.Prima(i, tp, Double.Parse(calculadora.Prima), vnom);
                     ob.escudo = Formulas.Escudo(i, tp, ob.interes);
