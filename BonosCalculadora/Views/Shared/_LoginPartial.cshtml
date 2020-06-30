@@ -3,6 +3,24 @@
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
+
+@if(User.Identity.Name=="admin@admin.com")
+//@if(User.Identity.Name.Contains("@admin.com"))
+{
+<li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="MetodoPago" asp-action="Index">MetodoPago</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="TasaInteres" asp-action="Index">TasaInteres</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Frecuenciapago" asp-action="Index">FrecuenciaPago</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Capitalizacion" asp-action="Index">Capitalizacion</a>
+                    </li>
+}
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
@@ -10,7 +28,7 @@
     </li>
     <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            <button  type="submit" class="nav-link btn btn-link">Logout</button>
         </form>
     </li>
 }
