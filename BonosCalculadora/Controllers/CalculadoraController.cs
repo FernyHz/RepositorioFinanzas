@@ -102,7 +102,6 @@ namespace BonosCalculadora.Controllers
                     ob.fbonista = Formulas.FBonista(i, tp, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
                     arraytir[i] = ob.fbonista;
                     arrayvan[i] = ob.fbonista; 
-
                     hi.Add(ob);
                 }
                 double tir = Formulas.calculartir(arraytir);
