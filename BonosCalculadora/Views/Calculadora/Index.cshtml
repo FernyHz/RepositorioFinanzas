@@ -3,123 +3,86 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="container">
+    <div class="position-relative overflow-hidden text-center bg-l
+        ight" style="background-image: url(https://cypherbits.net/wp-content/uploads/2019/08/videoblocks-stock-market-financial-statistics-on-screen-share-pricing-online-trading-data-electronic-chart-with-stock-market-fluctuations_byprwtkrx_thumbnail-full12.png) ">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-3 font-weight-normal" style="color: white">Calculadora de Bonos.</h1>
+        </div>
+    </div>
 
-<h1>Index</h1>
+    <a asp-action="Create" type="button" class="btn btn-danger m-3">Ingresar Datos</a>
+</div>
+<section id="services" class="py-5">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-header bg-dark text-white">
+                            <h3>Datos.</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Valor Nominal: @Html.DisplayFor(modelItem => item.Vnominal)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Valor Comercial:  @Html.DisplayFor(modelItem => item.Vcomercial)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Nº de Años: @Html.DisplayFor(modelItem => item.NAños)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Frecuencia de pago: @Html.DisplayFor(modelItem => item.FrecuenciaPago.Tipofrecuencia)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Días por Año: @Html.DisplayFor(modelItem => item.DiasAño)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Tipo de Tasa de Interes: @Html.DisplayFor(modelItem => item.TasaInteres.TipoTasa)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Capitalización: @Html.DisplayFor(modelItem => item.Capitalizacion.TipoCapitalizacion)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Tasa de Interes: @Html.DisplayFor(modelItem => item.TasaDeInteres)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Tasa anual de descuento: @Html.DisplayFor(modelItem => item.Cok)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> Fecha de Emisión: @Html.DisplayFor(modelItem => item.FechaEmision)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> %Prima: @Html.DisplayFor(modelItem => item.Prima)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> %Estructuración: @Html.DisplayFor(modelItem => item.Estructuración)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> %Colocación:  @Html.DisplayFor(modelItem => item.Colocación)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> %Flotación: @Html.DisplayFor(modelItem => item.Flotacion)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check"></i> %CAVALI:  @Html.DisplayFor(modelItem => item.Cavali)
+                                </li>
+                            </ul>
+                            <a asp-action="Details" asp-route-id="@item.CalculadoraId" class="btn btn-danger btn-block mt-2">Details</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <a asp-action="Edit" asp-route-id="@item.CalculadoraId" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.CalculadoraId" class="btn btn-primary btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table-bordered  table-responsive ">
-    <thead >
-        <tr class="table-info">
-            <th >
-                @Html.DisplayNameFor(model => model.Vnominal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vcomercial)
-            </th>
-            <th>
-                Tasa
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NAños)
-            </th>
-            <th>
-                Dias (Año)     
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cok)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaEmision)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prima)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estructuración)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Colocación)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flotacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cavali)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FrecuenciaPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TasaInteres)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Capitalizacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MetodoPago)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vnominal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vcomercial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TasaDeInteres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NAños)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiasAño)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cok)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaEmision)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prima)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estructuración)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Colocación)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Flotacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cavali)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FrecuenciaPago.Tipofrecuencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TasaInteres.TipoTasa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capitalizacion.TipoCapitalizacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetodoPago.TipoMetodo)
-            </td>
-            <td>
-                <small> <a asp-action="Edit" asp-route-id="@item.CalculadoraId">Edit</a></small> 
-                <small><a asp-action="Details" asp-route-id="@item.CalculadoraId">Details</a></small> 
-                <small> <a asp-action="Delete" asp-route-id="@item.CalculadoraId">Delete</a></small>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+

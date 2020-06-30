@@ -122,8 +122,6 @@ namespace BonosCalculadora.Models
         }
 
 
-
-
         static public double Bono(int periodo, int totalperiodos,double vnom)
         {
             double bono = 0;
@@ -329,7 +327,7 @@ namespace BonosCalculadora.Models
         //Hallando VAN para una serie de numeros
         static public double CalcularVAN(double tasa, double[] array)
         {
-            double van = Round(Financial.NPV(tasa, ref array),2);
+            double van = Financial.NPV(tasa, ref array);
             return van;
         }
 
@@ -342,6 +340,11 @@ namespace BonosCalculadora.Models
             return arregloaux;     
         }
 
+        static public double CalcularTCEA(double tir,double DiasAño,double frec)
+        {
+            double tcea = Round(Pow(tir +1,DiasAño/frec)-1,6);
+            return tcea;
+        }
 
 
 

@@ -77,19 +77,24 @@ namespace BonosCalculadora.Controllers
             ViewBag.Cib = cib;
             //variables
             double vnom = Double.Parse(calculadora.Vnominal);
+            double fbonista = 0;
             List<Objeto> hi = new List<Objeto>();
+            double[] arraytiremi = new double[tp + 1];
+            double[] arraytiremiescu = new double[tp + 1];
+            double[] arraytirbon = new double[tp + 1];
+            double[] arrayvan = new double[tp + 1];
+           
             if (calculadora.MetodoPago.TipoMetodo == "Americano")
             {
                 aux = 0;
-                double[] arraytir = new double[tp + 1];
-                double[] arrayvan = new double[tp + 1];
-
+                
                 for (int i = 0; i <= tp; i++)
                 {
                     Objeto ob = new Objeto();
                     ob.numero = i;
                     ob.infanual = 0;
                     ob.infperiodo = 0;
+                   
                     ob.bono = Formulas.Bono(i, tp, Double.Parse(calculadora.Vnominal));
                     ob.bonoindexado = Formulas.BonoIndexado(i, tp, ob.bono, ob.infperiodo);
                     ob.interes = Formulas.CalcularInteres(i, tp, ob.bonoindexado, efp);
@@ -100,17 +105,29 @@ namespace BonosCalculadora.Controllers
                     ob.femisor = Formulas.FEmisor(i, tp, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
                     ob.femiescu = Formulas.FEmisorEscudo(i, tp, ob.escudo, ob.femisor);
                     ob.fbonista = Formulas.FBonista(i, tp, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
-                    arraytir[i] = ob.fbonista;
+                    if (i == 0) { fbonista = ob.fbonista; }
+                    arraytiremi[i] = ob.femisor;
+                    arraytirbon[i] = ob.fbonista;
+                    arraytiremiescu[i] = ob.femiescu;
                     arrayvan[i] = ob.fbonista; 
                     hi.Add(ob);
                 }
-                double tir = Formulas.calculartir(arraytir);
-                
+                double tirboni = Formulas.calculartir(arraytirbon);
+                double tiremi = Formulas.calculartir(arraytiremi);
+                double tiremiescu = Formulas.calculartir(arraytiremiescu);
+
                 double[] arrayvanreducido = Formulas.ReduceTamaño(arrayvan);
-                double van = Formulas.CalcularVAN(ck,arrayvanreducido);
-              
-                ViewBag.t = tir;
+                double van = Round(Formulas.CalcularVAN(ck,arrayvanreducido),2);
+                double fb = Round(fbonista + van,2);
+                double tcabonista = Formulas.CalcularTCEA(tirboni, calculadora.DiasAño, frec);
+                double tcaemisor = Formulas.CalcularTCEA(tiremi, calculadora.DiasAño, frec);
+                double tcaemisorescu = Formulas.CalcularTCEA(tiremiescu, calculadora.DiasAño, frec);
+
                 ViewBag.vna = van;
+                ViewBag.fbon = fb;
+                ViewBag.tcboni = tcabonista;
+                ViewBag.tcemi = tcaemisor;
+                ViewBag.tcemiescu = tcaemisorescu;
             }
             else if (calculadora.MetodoPago.TipoMetodo == "Aleman")
             {
@@ -131,11 +148,32 @@ namespace BonosCalculadora.Controllers
                     ob.escudo = Formulas.Escudo(i, tp, ob.interes);
                     ob.femisor = Formulas.FEmisor(i, tp, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
                     ob.femiescu = Formulas.FEmisorEscudo(i, tp, ob.escudo, ob.femisor);
-                    ob.fbonista = Formulas.FBonista(i, tp, Double.Parse(calculadora.Vcomercial), cib, ob.femisor); ;
+                    ob.fbonista = Formulas.FBonista(i, tp, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
+                    if (i == 0) { fbonista = ob.fbonista; }
                     //es + porque la amort esta en negativo
                     aux += ob.amort;
+                    arraytiremi[i] = ob.femisor;
+                    arraytirbon[i] = ob.fbonista;
+                    arraytiremiescu[i] = ob.femiescu;
+                    arrayvan[i] = ob.fbonista;
                     hi.Add(ob);
                 }
+                double tirboni = Formulas.calculartir(arraytirbon);
+                double tiremi = Formulas.calculartir(arraytiremi);
+                double tiremiescu = Formulas.calculartir(arraytiremiescu);
+
+                double[] arrayvanreducido = Formulas.ReduceTamaño(arrayvan);
+                double van = Round(Formulas.CalcularVAN(ck, arrayvanreducido), 2);
+                double fb = Round(fbonista + van, 2);
+                double tcabonista = Formulas.CalcularTCEA(tirboni, calculadora.DiasAño, frec);
+                double tcaemisor = Formulas.CalcularTCEA(tiremi, calculadora.DiasAño, frec);
+                double tcaemisorescu = Formulas.CalcularTCEA(tiremiescu, calculadora.DiasAño, frec);
+
+                ViewBag.vna = van;
+                ViewBag.fbon = fb;
+                ViewBag.tcboni = tcabonista;
+                ViewBag.tcemi = tcaemisor;
+                ViewBag.tcemiescu = tcaemisorescu;
             }
             else if (calculadora.MetodoPago.TipoMetodo == "Frances")
             {
@@ -157,10 +195,32 @@ namespace BonosCalculadora.Controllers
                     ob.femisor = Formulas.FEmisor(i, tp, ob.cuota, ob.prima, Double.Parse(calculadora.Vcomercial), cie);
                     ob.femiescu = Formulas.FEmisorEscudo(i, tp, ob.escudo, ob.femisor);
                     ob.fbonista = Formulas.FBonista(i, tp, Double.Parse(calculadora.Vcomercial), cib, ob.femisor);
+                    if (i == 0) { fbonista = ob.fbonista; }
                     aux += ob.amort;
+                    arraytiremi[i] = ob.femisor;
+                    arraytirbon[i] = ob.fbonista;
+                    arraytiremiescu[i] = ob.femiescu;
+                    arrayvan[i] = ob.fbonista;
 
                     hi.Add(ob);
                 }
+
+                double tirboni = Formulas.calculartir(arraytirbon);
+                double tiremi = Formulas.calculartir(arraytiremi);
+                double tiremiescu = Formulas.calculartir(arraytiremiescu);
+
+                double[] arrayvanreducido = Formulas.ReduceTamaño(arrayvan);
+                double van = Round(Formulas.CalcularVAN(ck, arrayvanreducido), 2);
+                double fb = Round(fbonista + van, 2);
+                double tcabonista = Formulas.CalcularTCEA(tirboni, calculadora.DiasAño, frec);
+                double tcaemisor = Formulas.CalcularTCEA(tiremi, calculadora.DiasAño, frec);
+                double tcaemisorescu = Formulas.CalcularTCEA(tiremiescu, calculadora.DiasAño, frec);
+
+                ViewBag.vna = van;
+                ViewBag.fbon = fb;
+                ViewBag.tcboni = tcabonista;
+                ViewBag.tcemi = tcaemisor;
+                ViewBag.tcemiescu = tcaemisorescu;
             }
             ViewBag.listahi = hi;
             return View(calculadora);
